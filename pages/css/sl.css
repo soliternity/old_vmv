@@ -1,0 +1,205 @@
+:root {
+    --sl-primary: #FF4E1F;
+    --sl-dark: #212121;
+    --sl-light: #f7f7f7;
+    --sl-background: #E8E6DE;
+    --sl-accent: #481E14;
+}
+
+body {
+    background-color: var(--sl-background);
+    font-family: sans-serif;
+    color: var(--sl-dark);
+    overflow: hidden;
+}
+
+.sl-header-search {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: var(--sl-light);
+    border-bottom: 1px solid var(--sl-dark);
+    z-index: 50;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.sl-header-title {
+    /* "Services/Repairs" on the left side using the primary color */
+    color: #FF4E1F; /* primary-color assumed from existing button styles (FF4E1F) */
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    flex-shrink: 0; /* Prevents shrinking */
+    padding-right: 1rem;
+    left: 78px;
+    position:  absolute;
+    padding-left: 1rem;
+}
+
+#sl-search-input {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    font-size: 1rem;
+    width: 300px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#sl-search-input::placeholder {
+    color: #999;
+}
+
+#sl-search-input:focus {
+    outline: none;
+    border-color: var(--sl-primary);
+    box-shadow: 0 0 0 3px rgba(255, 78, 31, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* New CSS for the log container and buttons */
+.sl-log-container {
+    max-width: 1500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.sl-log-type-selector {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.sl-log-btn {
+    padding: 10px 20px;
+    border: 1px solid var(--sl-dark);
+    border-radius: 5px;
+    background-color: var(--sl-light);
+    color: var(--sl-dark);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.sl-log-btn:hover {
+    background-color: var(--sl-primary);
+    color: #fff;
+    border-color: var(--sl-primary);
+}
+
+.sl-btn-active {
+    background-color: var(--sl-primary);
+    color: #fff;
+    border-color: var(--sl-primary);
+    box-shadow: 0 2px 5px rgba(255, 78, 31, 0.2);
+}
+
+/* New table styles */
+#sl-table-container {
+    overflow-x: auto;
+    max-height: 850px;
+}
+
+.sl-table-scroller {
+    max-height: 600px; /* Adjust this value as needed for the desired height */
+    overflow-y: auto;
+}
+
+#sl-logs-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+}
+
+#sl-logs-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: var(--sl-primary);
+}
+
+#sl-logs-table th,
+#sl-logs-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+#sl-logs-table th {
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    border-bottom: 2px solid var(--sl-accent);
+}
+
+#sl-logs-table tbody {
+    display: block;
+    width: 100%;
+}
+
+#sl-logs-table tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+#sl-logs-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#sl-logs-table tbody tr:hover {
+    background-color: #f1f1f1;
+    cursor: pointer;
+}
+
+.sl-log-status {
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.sl-status-success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.sl-status-failed {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.sl-status-create {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.sl-status-update {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.sl-status-archive {
+    background-color: #e2e3e5;
+    color: #383d41;
+}
+
+#sl-logs-table .sl-no-results,
+#sl-logs-table .sl-error-message,
+#sl-logs-table .sl-loading-spinner {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.1rem;
+    color: #666;
+}

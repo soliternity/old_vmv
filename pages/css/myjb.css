@@ -1,0 +1,538 @@
+:root {
+    --mj-primary: #FF4E1F;
+    --mj-dark: #212121;
+    --mj-light: #f7f7f7;
+    --mj-background: #E8E6DE;
+    --mj-accent: #481E14;
+    --mj-success: #28a745;
+    --mj-info: #007bff;
+    --mj-secondary: #6c757d;
+}
+
+body {
+    background-color: var(--mj-background);
+    color: var(--mj-dark);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.mj-header-title {
+    color: #FF4E1F; 
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    flex-shrink: 0; 
+    padding-right: 1rem;
+    left: 78px;
+    position:  absolute;
+    padding-left: 1rem;
+}
+
+.mj-header-search {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: var(--mj-light);
+    border-bottom: 1px solid var(--mj-dark);
+    z-index: 50;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#mj-search-input {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    font-size: 1rem;
+    width: 300px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#mj-search-input::placeholder {
+    color: #999;
+}
+
+#mj-search-input:focus {
+    outline: none;
+    border-color: var(--mj-primary);
+    box-shadow: 0 0 0 3px rgba(255, 78, 31, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Job List Container --- */
+.jo-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Job Card Styles --- */
+.jo-card {
+    background-color: var(--mj-light);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.jo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.jo-card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.jo-card-details h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--mj-primary);
+}
+
+.jo-card-details p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--mj-dark);
+}
+
+.jo-card-details p strong {
+    color: var(--mj-accent);
+}
+
+/* --- Status Tag Styles --- */
+.jo-status-tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    white-space: nowrap;
+    min-width: 80px;
+    text-align: center;
+}
+
+.jo-status-pending {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.jo-status-ongoing {
+    background-color: #17a2b8;
+    color: #fff;
+}
+
+.jo-status-completed {
+    background-color: var(--mj-success);
+    color: #fff;
+}
+
+/* --- Action Buttons and Icons --- */
+.jo-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.jo-card-actions button {
+    background-color: var(--mj-primary);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.jo-card-actions button:hover {
+    background-color: #d83a15;
+}
+
+.jo-card-actions .jo-view-btn {
+    background-color: var(--mj-accent);
+}
+
+.jo-card-actions .jo-view-btn:hover {
+    background-color: #31150e;
+}
+
+/* --- Modal Styles for Job Details --- */
+.mj-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.jo-details-modal {
+    background-color: var(--mj-light);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    max-width: 700px;
+    width: 100%;
+    position: relative;
+    color: var(--mj-dark);
+}
+
+.jo-details-modal h2 {
+    color: var(--mj-primary);
+    margin-top: 0;
+}
+
+.jo-details-modal p {
+    margin: 0.5rem 0;
+}
+
+.jo-service-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.jo-service-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #ccc;
+}
+
+.jo-service-item:last-child {
+    border-bottom: none;
+}
+
+.jo-service-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border: none;
+    color: white;
+}
+
+.jo-start-btn {
+    background-color: var(--mj-info);
+}
+
+.jo-start-btn:hover {
+    background-color: #0056b3;
+}
+
+.jo-finish-btn {
+    background-color: var(--mj-primary);
+}
+
+.jo-finish-btn:hover {
+    background-color: #d83a15;
+}
+
+.jo-service-completed-text {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--mj-success);
+}
+
+/* --- Parts/Hours Modal Styles --- */
+.jo-parts-hours-modal {
+    text-align: left;
+}
+
+.jo-parts-hours-modal h3 {
+    color: var(--mj-accent);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.jo-hours-section label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.jo-hours-section #jo-hours-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+/* REMOVED: Styles for jo-notes-label and jo-notes-input */
+
+.jo-part-select-container {
+    position: relative;
+    margin-bottom: 1rem;
+}
+
+#jo-part-search {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.jo-part-dropdown-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    display: none; 
+}
+
+.jo-part-dropdown-list li {
+    padding: 0.75rem;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.jo-part-dropdown-list li:hover {
+    background-color: var(--mj-background);
+}
+
+#jo-selected-parts-list {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    background-color: #fcfcfc;
+}
+
+.jo-selected-part-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed #eee;
+    flex-wrap: wrap; 
+}
+
+.jo-selected-part-item:last-child {
+    border-bottom: none;
+}
+
+.jo-part-name {
+    flex-grow: 1;
+    font-weight: 500;
+    flex-basis: 100%; 
+    margin-bottom: 0.5rem;
+}
+
+.jo-part-inputs {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-grow: 1;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.jo-part-inputs input[type="number"],
+.jo-part-inputs input[type="text"] {
+    width: 100px;
+    padding: 0.25rem;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.jo-part-inputs input[disabled] {
+    background-color: #eee;
+    color: #666;
+    border: 1px solid #ddd;
+}
+
+.jo-part-inputs label {
+    font-size: 0.9rem;
+    font-weight: normal;
+    white-space: nowrap;
+}
+
+.jo-part-subtotal {
+    font-weight: bold;
+    color: var(--mj-primary);
+    margin-left: 1rem;
+    white-space: nowrap;
+}
+
+.jo-remove-part-btn {
+    background: none;
+    border: none;
+    color: var(--mj-primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    padding: 0 0.5rem;
+}
+
+.jo-remove-part-btn:hover {
+    color: var(--mj-dark);
+}
+
+#jo-parts-submit-btn {
+    margin-top: 1.5rem;
+    width: 100%;
+    background-color: var(--mj-info);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#jo-parts-submit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* --- Confirmation Modal Styling --- */
+
+.jo-confirmation-modal {
+    text-align: left;
+}
+
+.jo-confirmation-modal h3 {
+    color: var(--mj-accent);
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.jo-confirmation-parts-list {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin: 0.5rem 0;
+}
+
+.jo-confirmation-parts-list li {
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.mj-total-cost {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--mj-primary);
+}
+
+
+/* Confirmation Button Container FIX */
+#jo-confirmation-btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+#jo-confirmation-btn-container button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    border: none;
+    color: white;
+    flex-basis: 45%; 
+    max-width: 150px;
+    margin-top: 0; 
+}
+
+#jo-confirmation-btn-container .jo-confirm-btn {
+    background-color: var(--mj-primary); 
+}
+
+#jo-confirmation-btn-container .jo-confirm-btn:hover {
+    background-color: #d83a15;
+}
+
+#jo-confirmation-btn-container .jo-cancel-btn {
+    background-color: var(--mj-secondary); 
+}
+
+#jo-confirmation-btn-container .jo-cancel-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Display for Completed Job Parts */
+.jo-service-parts-used {
+    margin-top: 0.5rem;
+    font-size: 0.85rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--mj-accent);
+}
+
+.jo-service-parts-used strong {
+    display: block;
+    margin-bottom: 0.25rem;
+    color: var(--mj-accent);
+}
+
+.jo-service-parts-used ul {
+    list-style-type: disc;
+    padding-left: 1rem;
+    margin: 0;
+}
+
+.jo-service-parts-used li {
+    margin-bottom: 0.1rem;
+    color: #444;
+}
+
+/* General Modal Styles */
+.jo-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: #999;
+}
+
+.jo-modal-close:hover {
+    color: var(--mj-dark);
+}
+
+.mj-no-results {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}

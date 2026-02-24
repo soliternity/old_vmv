@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/au.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <title>VMV Users | JEFFIX</title>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <div class="au-header">
+        <h1 class="au-header-title">VMV Users List</h1>
+        <input type="text" id="au-search-input" placeholder="Search users...">
+    </div>
+    
+    <div class="au-sort-container">
+        <label for="au-sort-select">Sort Member Since:</label>
+        <select id="au-sort-select">
+            <option value="desc">Newest First (Descending)</option>
+            <option value="asc">Oldest First (Ascending)</option>
+        </select>
+    </div>
+
+    <div class="au-scroll-container">
+        <table id="au-user-list" class="au-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Member Since</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="au-table-body">
+                </tbody>
+        </table>
+    </div>
+
+    <div id="au-modal" class="au-modal">
+        <div class="au-modal-content">
+            <span class="au-close-button">&times;</span>
+            <div id="au-modal-details"></div>
+        </div>
+    </div>
+</body>
+<script src="../js/au.js"></script>     
+<script src="../js/nav.js"></script>
+</html>

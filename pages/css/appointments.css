@@ -1,0 +1,540 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    background: #E8E6DE;
+    overflow: hidden;
+    left: 39px;
+}
+
+.appt-viewer-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 1500px;
+    max-height: 1200px;
+    margin: 0 auto;
+    padding: 20px 20px;
+    background: E8E6DE;
+    min-height: 100vh;
+}
+
+.appt-main-header {
+    text-align: center;
+    color: #FF4E1F;
+}
+
+.appt-current-date {
+    font-size: 40px;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.appt-calendar-wrapper {
+    height: 950px;
+    background: #f7f7f7;
+    border-radius: 15px;
+    border: #212121 2px solid;
+    overflow: hidden;
+}
+
+.appt-nav-section {
+    background: white;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #212121;
+}
+
+.appt-nav-btn {
+    background: #FF4E1F;
+    color: #f7f7f7;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s ease;
+}
+
+.appt-nav-btn:hover {
+    background: #481E14;
+    transform: translateY(-2px);
+}
+
+.appt-month-display {
+    font-size: 35px;
+    font-weight: 600;
+    color: #212121;
+}
+
+.appt-edit-controls {
+    background: #E8E6DE;
+    padding: 15px 20px;
+    display: none;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid #212121;
+}
+
+.appt-edit-btn {
+    background: #FF4E1F;
+    color: #f7f7f7;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.appt-edit-btn:hover {
+    background: #481E14;
+    transform: translateY(-2px);
+}
+
+.appt-selected-count {
+    color: #212121;
+    font-weight: 500;
+}
+
+.appt-grid-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: #212121;
+}
+
+.appt-day-header {
+    background: #481E14;
+    color: #f7f7f7;
+    padding: 15px 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.appt-day-cell {
+    background: #f7f7f7;
+    min-height: 132.1px;
+    padding: 10px;
+    position: relative;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.appt-day-cell:hover {
+    background: #E8E6DE;
+    border-color: #FF4E1F;
+}
+
+.appt-day-number {
+    font-weight: 600;
+    color: #212121;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.appt-day-checkbox {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.appt-other-month {
+    color: #481E14;
+    background: #E8E6DE;
+    cursor: not-allowed;
+}
+
+.appt-day-cell.past-day {
+    background: #E8E6DE;
+    color: #481E14;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.appt-day-cell.past-day:hover {
+    background: #E8E6DE;
+    border-color: transparent;
+    transform: none;
+}
+
+.appt-day-cell.unavailable {
+    background: #ffebee;
+    border: 2px solid #f44336;
+}
+
+.appt-day-cell.unavailable .appt-day-number {
+    color: #f44336;
+}
+
+.appt-day-cell.limited-hours {
+    background: #fff3e0;
+    border: 2px solid #ff9800;
+}
+
+.appt-day-cell.limited-hours .appt-day-number {
+    color: #ff9800;
+}
+
+.appt-today {
+    background: #FF4E1F !important;
+}
+
+.appt-today .appt-day-number {
+    color: #f7f7f7;
+    background: #481E14;
+    color: #f7f7f7;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+/* Modal Overlay: CRUCIAL for full-screen display */
+.appt-details-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.appt-modal-content {
+    background: #f7f7f7;
+    padding: 25px;
+    border-radius: 15px;
+    max-width: 400px;
+    width: 90%;
+    max-height: 500px;
+    position: relative;
+    animation: modalSlideIn 0.3s ease;
+    border: 2px solid #FF4E1F;
+}
+
+.appt-edit-modal-content,
+/* ADDED: Missing style for the new modal content class */
+.appt-add-modal-content {
+    background: #f7f7f7;
+    padding: 25px;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 600px;
+    position: relative;
+    animation: modalSlideIn 0.3s ease;
+    border: 2px solid #FF4E1F;
+}
+
+.appt-time-slots {
+    display: block;
+    margin-top: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.appt-time-slots::-webkit-scrollbar {
+    width: 6px;
+}
+
+.appt-time-slots::-webkit-scrollbar-track {
+    background: #E8E6DE;
+    border-radius: 3px;
+}
+
+.appt-time-slots::-webkit-scrollbar-thumb {
+    background: #FF4E1F;
+    border-radius: 3px;
+}
+
+.appt-time-slots::-webkit-scrollbar-thumb:hover {
+    background: #481E14;
+}
+
+.appt-time-slot {
+    background: #E8E6DE;
+    color: #212121;
+    padding: 12px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    text-align: left;
+    font-weight: 500;
+    margin-bottom: 6px;
+}
+
+.appt-time-slot.has-appointment {
+    background: #481E14;
+    color: #f7f7f7;
+    border-color: #FF4E1F;
+}
+
+.appt-appointment-title {
+    font-size: 0.85em;
+    margin-top: 4px;
+    font-weight: 600;
+}
+
+.appt-selected-date {
+    font-size: 1.1rem;
+    color: #FF4E1F;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.appt-edit-form-group {
+    margin-bottom: 20px;
+}
+
+.appt-edit-form-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #212121;
+}
+
+/* General form input styling for the new modal */
+.appt-form-input,
+.appt-form-select {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.appt-radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.appt-radio-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.appt-radio-option input[type="radio"] {
+    width: 16px;
+    height: 16px;
+}
+
+.appt-time-slots-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 15px;
+    background: #E8E6DE;
+    border-radius: 8px;
+}
+
+.appt-time-slot-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    background: #f7f7f7;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.appt-time-slot-checkbox:hover {
+    border-color: #FF4E1F;
+}
+
+.appt-time-slot-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+}
+
+.appt-time-slot-checkbox label {
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0;
+}
+
+.appt-time-slots-section {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.appt-time-slots-section.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.appt-modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.appt-save-btn,
+.appt-cancel-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.appt-save-btn {
+    background: #FF4E1F;
+    color: #f7f7f7;
+}
+
+.appt-save-btn:hover {
+    background: #481E14;
+}
+
+.appt-cancel-btn {
+    background: #E8E6DE;
+    color: #212121;
+}
+
+.appt-cancel-btn:hover {
+    background: #d0cfc7;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.appt-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #212121;
+}
+
+.appt-modal-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #212121;
+    text-align: center;
+}
+
+.appt-modal-info {
+    margin-bottom: 10px;
+    color: #481E14;
+    text-align: center;
+}
+
+.appt-availability-status {
+    font-size: 10px;
+    margin-top: 2px;
+    font-weight: 500;
+}
+
+/* --- NEW STYLES FOR FAB & ADD APPOINTMENT MODAL ELEMENTS --- */
+
+/* Floating Action Button (FAB) Style */
+.appt-fab-btn {
+    position: fixed; 
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background: #FF4E1F;
+    color: #f7f7f7;
+    border: none;
+    border-radius: 50%;
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 60px; 
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.3s, transform 0.3s;
+    z-index: 900; 
+}
+
+.appt-fab-btn:hover {
+    background: #481E14;
+    transform: scale(1.05);
+}
+
+/* Customer Search/Dropdown Container */
+.appt-search-dropdown-container {
+    position: relative; 
+}
+
+/* Search Results Dropdown List */
+.appt-search-results-list {
+    position: absolute;
+    top: 100%; 
+    left: 0;
+    right: 0;
+    z-index: 10;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    border-top: 1px solid #FF4E1F; 
+    border-radius: 0 0 6px 6px;
+    background-color: #ffffff;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none; 
+}
+
+.appt-search-result-item {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #212121;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.1s;
+}
+
+.appt-search-result-item:last-child {
+    border-bottom: none;
+}
+
+.appt-search-result-item:hover {
+    background-color: #f0f0f0;
+}
+
+.appt-search-result-item.no-results {
+    color: #757575;
+    cursor: default;
+    background-color: #fff;
+    text-align: center;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parts Management | JEFFIX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/ip.css">
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+    
+    <div class="ip-header">
+        <h1 class="ip-header-title">Parts Inventory</h1>
+        <div class="ip-controls">
+            <input type="text" id="ip-search-input" placeholder="Search parts...">
+        </div>
+    </div>
+
+    <div class="ip-content-container">
+        <div class="ip-table-container">
+            <table id="ip-list-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Brand</th>
+                        <th>Cost</th>
+                        <th>Category</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="ip-table-body">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <button id="add-ip-btn" class="ip-add-btn">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+
+    <div id="ip-details-overlay" class="ip-overlay">
+        <div class="ip-overlay-content">
+            <span class="ip-overlay-close" id="details-overlay-close-btn">&times;</span>
+            <h2 id="overlay-title">Add New Part</h2>
+            
+            <p id="ip-details-message" class="ip-message-area"></p>
+            
+            <form id="ip-part-form">
+                <input type="hidden" id="overlay-part-id">
+                <div class="input-group"><label>Part Name</label><input type="text" id="overlay-part-name" required></div>
+                <div class="input-group"><label>Brand</label><input type="text" id="overlay-brand" required></div>
+                
+                <div class="input-group">
+                    <label for="overlay-category">Category</label>
+                    <select id="overlay-category" required>
+                        <option value="">Select Category</option>
+                        <option value="Engine">Engine</option>
+                        <option value="Transmission/Clutch">Transmission/Clutch</option>
+                        <option value="Electrical">Electrical</option>
+                        <option value="Brake">Brake</option>
+                        <option value="AC/Cooling">AC/Cooling</option>
+                    </select>
+                </div>
+                
+                <div class="input-group"><label>Cost</label><input type="number" id="overlay-cost" step="0.01" required></div>
+                <button type="submit" class="ip-confirm-btn">Save Part</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="delete-ip-overlay" class="ip-overlay">
+        <div class="ip-overlay-content">
+            <span class="ip-overlay-close" id="delete-overlay-close-btn">&times;</span>
+            <h2>Delete Part?</h2>
+            <p>Are you sure you want to delete <span id="ip-to-delete-name" style="font-weight:600;">[Part Name]</span>?</p>
+            
+            <p id="ip-delete-message" class="ip-message-area"></p>
+            
+            <div class="confirmation-buttons">
+                <button id="confirm-delete-btn" class="ip-confirm-btn">Delete</button>
+                <button id="cancel-delete-btn" class="ip-cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/nav.js"></script>
+    <script src="../js/ip.js"></script>
+
+</body>
+</html>

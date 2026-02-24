@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JEFFIX Car Diagnostics - AI-Powered Car Troubleshooting</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="idx.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo"><i class="fas fa-car"></i> JEFFIX</div>
+      <button class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <nav class="nav" id="mainNav">
+        <a href="#about">About Us</a>
+        <a href="#features">Features</a>
+        <a href="#contact">Contact</a>
+        <button class="btn-login-nav" id="LoginBtn">Sign In</button>
+      </nav>
+    </header>
+
+    <div class="overlay" id="Overlay">
+      <div class="overlay-content">
+        <h2 class="overlay-title">Select Login Type</h2>
+        <button class="option-btn jeffix-btn" id="JeffixLogin">
+          Jeffix Log In
+        </button>
+        <button class="option-btn admin-btn" id="AdminLogin">
+          Admin Login
+        </button>
+        <button class="close-btn" id="CloseOverlay">Cancel</button>
+      </div>
+    </div>
+
+    <section class="hero">
+      <div class="hero-content">
+        <h1>Advanced AI Car Diagnostics</h1>
+        <p>
+          Instantly identify issues with your Toyota Vios Gen 3 — powered by
+          cutting-edge AI technology for accurate results.
+        </p>
+        <div class="hero-buttons">
+          <a href="#features" class="btn btn-secondary"
+            ><i class="fas fa-info-circle"></i> Learn More</a
+          >
+          <button class="btn btn-primary" id="DownloadBtn">
+            <i class="fas fa-download"></i> Download Application
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="features">
+      <div class="container">
+        <h2>Why Choose JEFFIX?</h2>
+        <div class="feature-list">
+          <div class="feature-item">
+            <i class="fa-solid fa-microchip"></i>
+            <h3>AI-Powered Analysis</h3>
+            <p>
+              Our advanced system uses machine learning to analyze your input
+              and predict car issues with 95% accuracy.
+            </p>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-car-burst"></i>
+            <h3>Detailed Issue Reports</h3>
+            <p>
+              Receive comprehensive breakdowns of problems, severity levels, and
+              recommended fixes with estimated costs.
+            </p>
+          </div>
+          <div class="feature-item">
+            <i class="fa-solid fa-bell"></i>
+            <h3>Maintenance Alerts</h3>
+            <p>
+              Receive timely reminders for upcoming services, repairs, and
+              checkups to keep your vehicle in top condition.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="container">
+        <h2>About JEFFIX Diagnostics</h2>
+        <div class="about-content">
+          <p>
+            JEFFIX Car Diagnostics is built specifically for Toyota Vios Gen 3
+            owners who want fast, reliable, and AI-powered insights into their
+            vehicle's damage. Our system combines automotive expertise with
+            artificial intelligence to provide accurate diagnostics.
+          </p>
+          <p>
+            Whether your car won't start, makes strange noises, or shows warning
+            lights, our system helps you understand the cause before stepping
+            into the repair shop, saving you time and money.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <h2>Disclaimer</h2>
+        <p>
+          This page is only for school or learning purposes. It does not copy or
+          break any copyrights.
+        </p>
+
+        <button class="btn btn-primary" onclick="login()">
+          <i class="fas fa-bolt"></i>Learn More
+        </button>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>JEFFIX</h3>
+            <p>
+              Advanced AI-powered car diagnostics for Toyota Vios Gen 3 owners.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#">FAQ</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Support</h3>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#contact">Contact Us</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>
+            © 2025 JEFFIX Car Diagnostics. All rights reserved. Academic
+            Purposes Only.
+          </p>
+        </div>
+      </div>
+    </footer>
+    <script>
+      document
+        .getElementById("LoginBtn")
+        .addEventListener("click", function (e) {
+          e.preventDefault(); // Prevent default action temporarily
+
+          // 1️⃣ Trigger maintenance reminder
+          fetch("b/maintenance_remind/send_maintenance_reminder.php", {
+            method: "GET",
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              console.log("Maintenance reminder triggered:", data);
+            })
+            .catch((error) =>
+              console.error("Error triggering reminder:", error),
+            )
+            .finally(() => {
+              // 2️⃣ Continue with the original Sign Up action
+              // Replace this with your actual signup logic if different
+              window.location.href = "#";
+            });
+        });
+    </script>
+    <script src="idx.js"></script>
+  </body>
+</html>

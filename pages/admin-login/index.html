@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | JEFFIX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #212121;
+        }
+        
+        .admin-login-container {
+            background-color: #E8E6DE;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            /* Added position: relative for button placement */
+            position: relative; 
+        }
+        
+        /* NEW CSS for the Back Button */
+        .btn-back {
+            /* Positioning */
+            position: absolute;
+            top: 15px;
+            left: 15px;
+
+            /* Styling */
+            background: none;
+            color: #481E14; /* Dark text color to match your scheme */
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+        }
+
+        .btn-back:hover {
+            background-color: #E8E6DE;
+            border-color: #FF4E1F; /* Highlight with your accent color */
+            color: #FF4E1F;
+        }
+
+        /* Adjust padding for the content below the header */
+        .admin-login-header {
+            text-align: center;
+            margin-bottom: 30px;
+            /* Adjust top margin so header doesn't overlap the button on small screen */
+            margin-top: 15px; 
+        }
+
+        .admin-login-icon {
+            background-color: #FF4E1F;
+            color: #f7f7f7;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 28px;
+        }
+        
+        .admin-login-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .admin-login-subtitle {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .admin-form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .admin-form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        
+        .admin-input-with-icon {
+            position: relative;
+        }
+        
+        .admin-form-input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        
+        .admin-form-input:focus {
+            border-color: #FF4E1F;
+            outline: none;
+        }
+        
+        .admin-input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+        
+        .admin-toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        
+        .admin-login-button {
+            background-color: #FF4E1F;
+            color: #f7f7f7;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .admin-login-button:hover {
+            background-color: #e64515;
+        }
+        
+        .admin-login-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+        
+        .admin-forgot-link {
+            color: #FF4E1F;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        .admin-forgot-link:hover {
+            text-decoration: underline;
+        }
+        
+        .admin-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .admin-modal-content {
+            background-color: #f7f7f7;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .admin-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .admin-modal-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        
+        .admin-modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #888;
+        }
+        
+        .admin-backup-note {
+            background-color: #E8E6DE;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .admin-backup-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        
+        .admin-submit-backup {
+            background-color: #481E14;
+            color: #f7f7f7;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .admin-submit-backup:hover {
+            background-color: #3a1810;
+        }
+        
+        .admin-password-strength {
+            height: 5px;
+            background-color: #eee;
+            border-radius: 3px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        
+        .admin-password-strength-bar {
+            height: 100%;
+            width: 0;
+            transition: width 0.3s;
+        }
+        
+        .admin-password-requirements {
+            margin-top: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .admin-step-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .admin-step {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin: 0 5px;
+        }
+        
+        .admin-step.active {
+            background-color: #FF4E1F;
+        }
+        
+        .admin-modal-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .admin-modal-button-secondary {
+            background-color: #E8E6DE;
+            color: #212121;
+            border: 1px solid #ddd;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        
+        .admin-success-message {
+            text-align: center;
+            padding: 20px;
+            color: #481E14;
+        }
+        
+        .admin-success-icon {
+            font-size: 48px;
+            color: #FF4E1F;
+            margin-bottom: 15px;
+        }
+        
+        .admin-error-message {
+            color: #d32f2f;
+            font-size: 13px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .admin-success-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #4caf50;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1001;
+        }
+        
+        .admin-loading {
+            display: none;
+            text-align: center;
+            margin: 10px 0;
+        }
+        
+        .admin-loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #FF4E1F;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-login-container">
+        <button
+            onclick="window.history.back()"
+            class="btn-back"
+            aria-label="Go back to the previous page"
+        >
+            <i class="fas fa-chevron-left"></i> Back
+        </button>
+
+        <div class="admin-login-header">
+            <div class="admin-login-icon">
+                <i class="fas fa-lock"></i>
+            </div>
+            <h1 class="admin-login-title">System Admin Login</h1>
+            <p class="admin-login-subtitle">Access the administration dashboard</p>
+        </div>
+        
+        <form id="admin-login-form">
+            <div class="admin-form-group">
+                <label class="admin-form-label" for="admin-username">Username</label>
+                <div class="admin-input-with-icon">
+                    <i class="fas fa-user admin-input-icon"></i>
+                    <input type="text" id="admin-username" class="admin-form-input" placeholder="Enter your username" required>
+                </div>
+                <p class="admin-error-message" id="admin-login-error"></p>
+            </div>
+            
+            <div class="admin-form-group">
+                <label class="admin-form-label" for="admin-password">Password</label>
+                <div class="admin-input-with-icon">
+                    <i class="fas fa-lock admin-input-icon"></i>
+                    <input type="password" id="admin-password" class="admin-form-input" placeholder="Enter your password" required>
+                    <button type="button" class="admin-toggle-password" id="admin-toggle-password">
+                        <i class="fas fa-eye"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="admin-loading" id="admin-login-loading">
+                <div class="admin-loading-spinner"></div>
+            </div>
+            
+            <button type="submit" class="admin-login-button">Login</button>
+            
+        </form>
+    </div>
+    
+    <div class="admin-modal" id="admin-forgot-modal">
+        <div class="admin-modal-content">
+            <div class="admin-modal-header">
+                <h2 class="admin-modal-title">Reset Password</h2>
+                <button class="admin-modal-close" id="admin-close-modal">&times;</button>
+            </div>
+            
+            <div class="admin-step-indicator">
+                <div class="admin-step active" id="admin-step-1"></div>
+                <div class="admin-step" id="admin-step-2"></div>
+                <div class="admin-step" id="admin-step-3"></div>
+            </div>
+            
+            <div id="admin-username-step">
+                <div class="admin-backup-note">
+                    <p>To reset your password, please first enter your username.</p>
+                </div>
+                
+                <form id="admin-username-form">
+                    <div class="admin-form-group">
+                        <label class="admin-form-label" for="admin-forgot-username">Username</label>
+                        <input type="text" id="admin-forgot-username" class="admin-backup-input" placeholder="Enter your username" required>
+                        <p class="admin-error-message" id="admin-username-error"></p>
+                    </div>
+                    
+                    <div class="admin-loading" id="admin-username-loading">
+                        <div class="admin-loading-spinner"></div>
+                    </div>
+                    
+                    <button type="submit" class="admin-submit-backup">Verify Username</button>
+                </form>
+            </div>
+            
+            <div id="admin-backup-code-step" style="display: none;">
+                <div class="admin-backup-note">
+                    <p>Please enter the backup code that was provided when you set up your account.</p>
+                </div>
+                
+                <form id="admin-backup-form">
+                    <div class="admin-form-group">
+                        <label class="admin-form-label" for="admin-backup-code">Backup Code</label>
+                        <input type="text" id="admin-backup-code" class="admin-backup-input" placeholder="Enter your backup code" required>
+                        <p class="admin-error-message" id="admin-backup-error"></p>
+                    </div>
+                    
+                    <div class="admin-loading" id="admin-backup-loading">
+                        <div class="admin-loading-spinner"></div>
+                    </div>
+                    
+                    <div class="admin-modal-navigation">
+                        <button type="button" class="admin-modal-button-secondary" id="admin-back-to-username">Back</button>
+                        <button type="submit" class="admin-submit-backup">Verify Code</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div id="admin-new-password-step" style="display: none;">
+                <div class="admin-backup-note">
+                    <p>Please enter your new password below. Make sure it's strong and secure.</p>
+                </div>
+                
+                <form id="admin-new-password-form">
+                    <div class="admin-form-group">
+                        <label class="admin-form-label" for="admin-new-password">New Password</label>
+                        <div class="admin-input-with-icon">
+                            <i class="fas fa-lock admin-input-icon"></i>
+                            <input type="password" id="admin-new-password" class="admin-form-input" placeholder="Enter new password" required>
+                            <button type="button" class="admin-toggle-password" id="admin-toggle-new-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <div class="admin-password-strength">
+                            <div class="admin-password-strength-bar" id="admin-password-strength-bar"></div>
+                        </div>
+                        <div class="admin-password-requirements">
+                            Must be at least 8 characters with uppercase, lowercase, number, and special character
+                        </div>
+                        <p class="admin-error-message" id="admin-password-error"></p>
+                    </div>
+                    
+                    <div class="admin-form-group">
+                        <label class="admin-form-label" for="admin-confirm-password">Confirm Password</label>
+                        <div class="admin-input-with-icon">
+                            <i class="fas fa-lock admin-input-icon"></i>
+                            <input type="password" id="admin-confirm-password" class="admin-form-input" placeholder="Confirm new password" required>
+                            <button type="button" class="admin-toggle-password" id="admin-toggle-confirm-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="admin-loading" id="admin-reset-loading">
+                        <div class="admin-loading-spinner"></div>
+                    </div>
+                    
+                    <div class="admin-modal-navigation">
+                        <button type="button" class="admin-modal-button-secondary" id="admin-back-to-backup">Back</button>
+                        <button type="submit" class="admin-submit-backup">Reset Password</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div id="admin-success-message" style="display: none;">
+                <div class="admin-success-message">
+                    <div class="admin-success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Password Reset Successful!</h3>
+                    <p>Your password has been reset successfully. You can now login with your new password.</p>
+                    <button class="admin-login-button" style="margin-top: 20px;" id="admin-return-to-login">Return to Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-success-toast" id="admin-success-toast">
+        <i class="fas fa-check-circle"></i> Operation completed successfully
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elements
+            const togglePasswordBtn = document.getElementById('admin-toggle-password');
+            const passwordInput = document.getElementById('admin-password');
+            const forgotPasswordLink = document.getElementById('admin-forgot-password');
+            const forgotModal = document.getElementById('admin-forgot-modal');
+            const closeModalBtn = document.getElementById('admin-close-modal');
+            const loginForm = document.getElementById('admin-login-form');
+            const usernameForm = document.getElementById('admin-username-form');
+            const backupForm = document.getElementById('admin-backup-form');
+            const newPasswordForm = document.getElementById('admin-new-password-form');
+            const usernameStep = document.getElementById('admin-username-step');
+            const backupStep = document.getElementById('admin-backup-code-step');
+            const newPasswordStep = document.getElementById('admin-new-password-step');
+            const successMessage = document.getElementById('admin-success-message');
+            const backToUsernameBtn = document.getElementById('admin-back-to-username');
+            const backToBackupBtn = document.getElementById('admin-back-to-backup');
+            const returnToLoginBtn = document.getElementById('admin-return-to-login');
+            const step1 = document.getElementById('admin-step-1');
+            const step2 = document.getElementById('admin-step-2');
+            const step3 = document.getElementById('admin-step-3');
+            const newPasswordInput = document.getElementById('admin-new-password');
+            const confirmPasswordInput = document.getElementById('admin-confirm-password');
+            const toggleNewPasswordBtn = document.getElementById('admin-toggle-new-password');
+            const toggleConfirmPasswordBtn = document.getElementById('admin-toggle-confirm-password');
+            const passwordStrengthBar = document.getElementById('admin-password-strength-bar');
+            const successToast = document.getElementById('admin-success-toast');
+            
+            // Error message elements
+            const loginError = document.getElementById('admin-login-error');
+            const usernameError = document.getElementById('admin-username-error');
+            const backupError = document.getElementById('admin-backup-error');
+            const passwordError = document.getElementById('admin-password-error');
+            
+            // Loading indicators
+            const loginLoading = document.getElementById('admin-login-loading');
+            const usernameLoading = document.getElementById('admin-username-loading');
+            const backupLoading = document.getElementById('admin-backup-loading');
+            const resetLoading = document.getElementById('admin-reset-loading');
+            
+            // Toggle password visibility
+            togglePasswordBtn.addEventListener('click', function() {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                
+                // Toggle eye icon
+                const eyeIcon = this.querySelector('i');
+                eyeIcon.classList.toggle('fa-eye');
+                eyeIcon.classList.toggle('fa-eye-slash');
+            });
+            
+            // Toggle new password visibility
+            toggleNewPasswordBtn.addEventListener('click', function() {
+                const type = newPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                newPasswordInput.setAttribute('type', type);
+                
+                // Toggle eye icon
+                const eyeIcon = this.querySelector('i');
+                eyeIcon.classList.toggle('fa-eye');
+                eyeIcon.classList.toggle('fa-eye-slash');
+            });
+            
+            // Toggle confirm password visibility
+            toggleConfirmPasswordBtn.addEventListener('click', function() {
+                const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                confirmPasswordInput.setAttribute('type', type);
+                
+                // Toggle eye icon
+                const eyeIcon = this.querySelector('i');
+                eyeIcon.classList.toggle('fa-eye');
+                eyeIcon.classList.toggle('fa-eye-slash');
+            });
+            
+            // Check password strength
+            newPasswordInput.addEventListener('input', function() {
+                const password = this.value;
+                let strength = 0;
+                
+                // Length check
+                if (password.length >= 8) strength += 25;
+                
+                // Uppercase check
+                if (/[A-Z]/.test(password)) strength += 25;
+                
+                // Lowercase check
+                if (/[a-z]/.test(password)) strength += 25;
+                
+                // Special character check
+                if (/[^A-Za-z0-9]/.test(password)) strength += 25;
+                
+                // Update strength bar
+                passwordStrengthBar.style.width = strength + '%';
+                
+                // Update color
+                if (strength < 50) {
+                    passwordStrengthBar.style.backgroundColor = '#ff4d4d';
+                } else if (strength < 100) {
+                    passwordStrengthBar.style.backgroundColor = '#ffa64d';
+                } else {
+                    passwordStrengthBar.style.backgroundColor = '#2eb82e';
+                }
+            });
+            
+            // Close modal
+            closeModalBtn.addEventListener('click', function() {
+                forgotModal.style.display = 'none';
+            });
+            
+            // Close modal if clicked outside
+            window.addEventListener('click', function(event) {
+                if (event.target === forgotModal) {
+                    forgotModal.style.display = 'none';
+                }
+            });
+            
+            // Handle login form submission (AJAX)
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('admin-username').value.trim();
+                const password = document.getElementById('admin-password').value.trim();
+                loginError.style.display = 'none';
+                loginLoading.style.display = 'block';
+
+                fetch('../../b/adm/admLogin.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    loginLoading.style.display = 'none';
+                    if (data.success) {
+                        showToast('Login successful!');
+                        window.location.href = '../dashboard'; // Uncomment for redirect
+                    } else {
+                        loginError.textContent = data.message || 'Invalid username or password';
+                        loginError.style.display = 'block';
+                    }
+                })
+                .catch(() => {
+                    console.log(e);
+                    loginLoading.style.display = 'none';
+                    loginError.textContent = 'Login error. Please try again.';
+                    loginError.style.display = 'block';
+                });
+            });
+
+            // Handle username verification form submission (AJAX)
+            let forgotStaffId = null;
+            usernameForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const username = document.getElementById('admin-forgot-username').value.trim();
+                usernameError.style.display = 'none';
+                usernameLoading.style.display = 'block';
+
+                fetch('../../b/adm/chkRole.php', {
+                    method: 'POST',
+                    body: new URLSearchParams({ username })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    usernameLoading.style.display = 'none';
+                    if (data.success && data.staff_id) {
+                        forgotStaffId = data.staff_id;
+                        usernameStep.style.display = 'none';
+                        backupStep.style.display = 'block';
+                        step1.classList.remove('active');
+                        step2.classList.add('active');
+                    } else {
+                        usernameError.textContent = data.message || 'Username not found or not admin';
+                        usernameError.style.display = 'block';
+                    }
+                })
+                .catch(() => {
+                    usernameLoading.style.display = 'none';
+                    usernameError.textContent = 'Error verifying username.';
+                    usernameError.style.display = 'block';
+                });
+            });
+
+            // Handle backup code form submission (AJAX)
+            backupForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const backupCode = document.getElementById('admin-backup-code').value.trim();
+                backupError.style.display = 'none';
+                backupLoading.style.display = 'block';
+
+                fetch('../../b/adm/bkupCode.php', {
+                    method: 'POST',
+                    body: new URLSearchParams({ staff_id: forgotStaffId, backup_code: backupCode })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    backupLoading.style.display = 'none';
+                    if (data.success) {
+                        backupStep.style.display = 'none';
+                        newPasswordStep.style.display = 'block';
+                        step2.classList.remove('active');
+                        step3.classList.add('active');
+                    } else {
+                        backupError.textContent = data.message || 'Invalid backup code';
+                        backupError.style.display = 'block';
+                    }
+                })
+                .catch(() => {
+                    backupLoading.style.display = 'none';
+                    backupError.textContent = 'Error verifying backup code.';
+                    backupError.style.display = 'block';
+                });
+            });
+
+            // Handle new password form submission (AJAX)
+            newPasswordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                if (newPasswordInput.value !== confirmPasswordInput.value) {
+                    passwordError.textContent = 'Passwords do not match';
+                    passwordError.style.display = 'block';
+                    return;
+                }
+                const password = newPasswordInput.value;
+                if (password.length < 8 || !/[A-Z]/.test(password) || 
+                    !/[a-z]/.test(password) || !/[^A-Za-z0-9]/.test(password)) {
+                    passwordError.textContent = 'Password does not meet the requirements';
+                    passwordError.style.display = 'block';
+                    return;
+                }
+                passwordError.style.display = 'none';
+                resetLoading.style.display = 'block';
+
+                fetch('../../b/adm/updPass.php', {
+                    method: 'POST',
+                    body: new URLSearchParams({ staff_id: forgotStaffId, new_password: password })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    resetLoading.style.display = 'none';
+                    if (data.success) {
+                        newPasswordStep.style.display = 'none';
+                        successMessage.style.display = 'block';
+                        showToast('Password reset successfully!');
+                    } else {
+                        passwordError.textContent = data.message || 'Password reset failed';
+                        passwordError.style.display = 'block';
+                    }
+                })
+                .catch(() => {
+                    resetLoading.style.display = 'none';
+                    passwordError.textContent = 'Error resetting password.';
+                    passwordError.style.display = 'block';
+                });
+            });
+
+            // Navigation buttons in modal
+            backToUsernameBtn.addEventListener('click', function() {
+                backupStep.style.display = 'none';
+                usernameStep.style.display = 'block';
+                step2.classList.remove('active');
+                step1.classList.add('active');
+            });
+
+            backToBackupBtn.addEventListener('click', function() {
+                newPasswordStep.style.display = 'none';
+                backupStep.style.display = 'block';
+                step3.classList.remove('active');
+                step2.classList.add('active');
+            });
+
+            // Return to login after successful password reset
+            returnToLoginBtn.addEventListener('click', function() {
+                forgotModal.style.display = 'none';
+                resetPasswordResetProcess();
+            });
+            
+            // Show toast message
+            function showToast(message) {
+                successToast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+                successToast.style.display = 'block';
+                
+                setTimeout(() => {
+                    successToast.style.display = 'none';
+                }, 3000);
+            }
+            
+            // Reset the password reset process to initial state
+            function resetPasswordResetProcess() {
+                usernameStep.style.display = 'block';
+                backupStep.style.display = 'none';
+                newPasswordStep.style.display = 'none';
+                successMessage.style.display = 'none';
+                step1.classList.add('active');
+                step2.classList.remove('active');
+                step3.classList.remove('active');
+                document.getElementById('admin-forgot-username').value = '';
+                document.getElementById('admin-backup-code').value = '';
+                document.getElementById('admin-new-password').value = '';
+                document.getElementById('admin-confirm-password').value = '';
+                passwordStrengthBar.style.width = '0';
+                
+                // Hide any error messages
+                usernameError.style.display = 'none';
+                backupError.style.display = 'none';
+                passwordError.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

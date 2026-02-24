@@ -1,0 +1,84 @@
+<div class="dashboard-view adm-view">
+    <section class="adm-section adm-business-summary">
+        <h3 class="adm-section-title">Shop Operations</h3>
+        <div class="adm-grid-container" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
+            <div class="adm-widget adm-job-orders">
+                <i class="fas fa-clipboard-list adm-icon"></i>
+                <div class="adm-data">
+                    <span class="adm-data-value">0</span>
+                    <span class="adm-data-label">Job Order Count</span>
+                </div>
+                <div class="adm-sub-data">
+                    <span>In Progress: 0</span> | <span>Completed (Today): 0</span>
+                </div>
+            </div>
+
+            <div class="adm-widget adm-transactions-today">
+                <i class="fas fa-receipt adm-icon"></i>
+                <div class="adm-data">
+                    <span class="adm-data-value">0</span>
+                    <span class="adm-data-label">Transactions Count Today</span>
+                </div>
+            </div>
+
+            <div class="adm-widget adm-appointments">
+                <i class="fas fa-calendar-check adm-icon"></i>
+                <div class="adm-data">
+                    <span class="adm-data-value">0</span>
+                    <span class="adm-data-label">Appointments (This Month)</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="adm-section adm-management-security">
+        <h3 class="adm-section-title">System Informations & Quick Access</h3>
+        
+        <div class="adm-grid-container adm-grid-2-cols" style="grid-template-columns: 1.5fr 1fr;">
+            
+            <div class="adm-metrics-container">
+                <h4 class="adm-subtitle">System Track</h4>
+                <div class="adm-grid-container" style="gap: 10px;">
+                    <div class="adm-widget adm-system-logs" style="border-left: 5px solid var(--accent-color);">
+                        <i class="fas fa-terminal adm-icon" style="color: var(--accent-color);"></i>
+                        <div class="adm-data">
+                            <span class="adm-data-value">0</span>
+                            <span class="adm-data-label">System Logs (24h)</span>
+                        </div>
+                    </div>
+    
+                    <div class="adm-widget adm-vmv-users" style="border-left: 5px solid var(--dark-color);">
+                        <i class="fas fa-user-shield adm-icon" style="color: var(--dark-color);"></i>
+                        <div class="adm-data">
+                            <span class="adm-data-value">0</span>
+                            <span class="adm-data-label">VMV Users Count</span>
+                        </div>
+                    </div>
+
+                    <div class="adm-widget adm-active-chats" style="border-left: 5px solid var(--accent-color);">
+                        <i class="fas fa-comments adm-icon" style="color: var(--dark-color);"></i>
+                        <div class="adm-data">
+                            <span class="adm-data-value">0</span>
+                            <span class="adm-data-label">Active Conversations</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="adm-links-container">
+                <h4 class="adm-subtitle">Shortcuts</h4>
+                
+                <button class="adm-management-btn" onclick="window.location.href='../staff-management'">
+                    <i class="fas fa-users"></i> Staff Management
+                </button>
+                <button class="adm-management-btn" onclick="window.location.href='../system-activities'">
+                    <i class="fas fa-shield-alt"></i> System Logs
+                </button>
+                <button class="adm-management-btn" onclick="window.location.href='../all-messages'">
+                    <i class="fas fa-envelope"></i> All Messages
+                </button>
+            </div>
+        </div>
+    </section>
+</div>

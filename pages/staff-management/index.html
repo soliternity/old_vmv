@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Management | JEFFIX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/stf.css">
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+    <div class="stf-header">
+        <h1 class="stf-header-title">Staff Management</h1>
+        <div class="stf-controls">
+            <select id="stf-role-filter" class="stf-filter-select">
+                <option value="">All Roles</option>
+                <option value="admin">Admin</option>
+                <option value="manager">Manager</option>
+                <option value="mechanic">Mechanic</option>
+                <option value="cashier">Cashier</option>
+            </select>
+            <input type="text" id="stf-search-input" placeholder="Search staff...">
+        </div>
+    </div>
+
+    <div class="stf-content-container">
+        <div class="stf-table-container">
+            <table id="stf-list-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="stf-table-body">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <button id="add-stf-btn" class="add-stf-btn">
+        +
+    </button>
+
+    <div id="stf-details-overlay" class="stf-overlay">
+        <div class="stf-overlay-content">
+            <span class="stf-overlay-close" id="details-overlay-close-btn">&times;</span>
+            <div class="stf-overlay-details-list">
+                <h2>Staff Details</h2>
+                <div class="stf-overlay-detail-item">
+                    <span class="stf-overlay-label">Last name:</span>
+                    <span id="overlay-last-name" class="stf-overlay-value"></span>
+                </div>
+                <div class="stf-overlay-detail-item">
+                    <span class="stf-overlay-label">First name:</span>
+                    <span id="overlay-first-name" class="stf-overlay-value"></span>
+                </div>
+                <div class="stf-overlay-detail-item">
+                    <span class="stf-overlay-label">Middle name:</span>
+                    <span id="overlay-middle-name" class="stf-overlay-value"></span>
+                </div>
+                <div class="stf-overlay-detail-item">
+                    <span class="stf-overlay-label">Username:</span>
+                    <span id="overlay-username" class="stf-overlay-value"></span>
+                </div>
+                <div class="stf-overlay-detail-item">
+                    <span class="stf-overlay-label">Email:</span>
+                    <span id="overlay-email" class="stf-overlay-value"></span>
+                </div>
+                <div class="stf-overlay-detail-item">
+                    <span class="stf-overlay-label">Role:</span>
+                    <div id="overlay-role-container" class="stf-overlay-value stf-role-edit-container">
+                        <select id="overlay-role-select" class="stf-role-select">
+                            <option value="admin">Admin</option>
+                            <option value="manager">Manager</option>
+                            <option value="mechanic">Mechanic</option>
+                            <option value="cashier">Cashier</option>
+                        </select>
+                        <button id="save-role-btn" class="save-role-btn" style="display:none;">Save Role</button>
+                    </div>
+                </div>
+                <div class="stf-overlay-detail-item">
+                    <span class="stf-overlay-label">Status:</span>
+                    <div class="status-toggle-container">
+                        <span id="overlay-status-text"></span>
+                        <label class="stf-status-switch">
+                            <input type="checkbox" id="overlay-status-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="add-stf-overlay" class="stf-overlay">
+        <div class="stf-overlay-content add-stf-overlay-content">
+            <span class="stf-overlay-close" id="add-overlay-close-btn">&times;</span>
+            <h2>Add New Staff</h2>
+            <form id="add-stf-form">
+                <div id="add-stf-error-message"
+                    style="display:none;color:#c00;font-weight:600;margin-bottom:1rem;text-align:left;"></div>
+                <div id="add-stf-success-message"
+                    style="display:none;color:#28a745;font-weight:600;margin-bottom:1rem;text-align:left;"></div>
+                <div class="input-group">
+                    <label for="new-first-name">First Name</label>
+                    <input type="text" id="new-first-name" required>
+                </div>
+                <div class="input-group">
+                    <label for="new-middle-name">Middle Name (Optional)</label>
+                    <input type="text" id="new-middle-name">
+                </div>
+                <div class="input-group">
+                    <label for="new-last-name">Last Name</label>
+                    <input type="text" id="new-last-name" required>
+                </div>
+                <div class="input-group">
+                    <label for="new-username">Username</label>
+                    <input type="text" id="new-username" required>
+                </div>
+                <div class="input-group">
+                    <label for="new-email">Email</label>
+                    <input type="email" id="new-email" required>
+                </div>
+                <div class="input-group">
+                    <label for="new-role">Role</label>
+                    <select id="new-role" required>
+                        <option value="Admin">Admin</option>
+                        <option value="Manager">Manager</option>
+                        <option value="Mechanic">Mechanic</option>
+                        <option value="Cashier">Cashier</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="new-password">Password</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="new-password" required>
+                        <button type="button" id="toggle-password-visibility" tabindex="-1">
+                            <i class="fa fa-eye" id="toggle-password-icon"></i>
+                        </button>
+                    </div>
+                </div>
+                <button type="submit">Add Staff</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="delete-stf-overlay" class="stf-overlay">
+        <div class="stf-overlay-content">
+            <h2>Delete Staff Member?</h2>
+            <p>Are you sure you want to delete <span id="stf-to-delete-name" style="font-weight:600;"></span>?</p>
+            <div class="confirmation-buttons">
+                <button id="confirm-delete-btn">Delete</button>
+                <button id="cancel-delete-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/nav.js"></script>
+    <script src="../js/stf.js"></script>
+
+</body>
+
+</html>

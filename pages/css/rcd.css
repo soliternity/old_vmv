@@ -1,0 +1,195 @@
+:root {
+    --rcd-primary: #FF4E1F;
+    --rcd-dark: #212121;
+    --rcd-light: #f7f7f7;
+    --rcd-background: #E8E6DE;
+    --rcd-accent: #481E14;
+}
+
+body {
+    background-color: var(--rcd-background);
+    font-family: sans-serif;
+    color: var(--rcd-dark);
+    margin: 0;
+    position: relative;
+    left: 78px;
+    max-width: calc(100% - 78px);
+}
+
+/* Original Header Design (Contains title, now modified to include search input and position elements) */
+.rcd-header-search {
+    flex-shrink: 0;
+    display: flex;
+    /* Use space-between to push the three elements (spacer, search, title) to the edges */
+    /* justify-content: space-between; */
+    align-items: center;
+    padding: 2rem 20px; /* Added horizontal padding */
+    background-color: var(--rcd-light);
+    border-bottom: 1px solid var(--rcd-dark);
+    z-index: 50;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-bottom: 0; /* Remove gap between header and controls */
+}
+
+/* New Spacer to balance the layout and center the search input */
+.rcd-header-spacer {
+    /* Takes up space equal to the title area to visually center the search */
+    width: 250px; 
+}
+
+.rcd-header-title {
+    color: var(--rcd-primary);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    /* This element is the third item in the flex container, pushing it to the right */
+    /* width: 250px; */ /* Giving it a fixed width to balance the spacer */
+    text-align: right; /* Align title text to the right side of its area */
+    position: relative;
+    /* left: 78px; */
+}
+
+/* NEW: Controls Area for Date/Time Filters (Below header, above table) */
+.rcd-controls-area {
+    display: flex;
+    /* Justify to the end to align filters to the right, similar to the title */
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem 20px; /* Padding for the controls area */
+    /* background-color: var(--rcd-light); */
+    /* border-bottom: 1px solid #ddd; */
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); */
+    margin-bottom: 20px; /* Space before the table container */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+/* Search Input Styling */
+#rcd-search-input {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    font-size: 1rem;
+    /* Let the flex container space handle the position */
+    width: 300px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+    /* This element is centered because of the spacer on the left and the title on the right */
+    position: absolute;
+    left: 40%;
+}
+
+#rcd-search-input::placeholder {
+    color: #999;
+}
+
+#rcd-search-input:focus {
+    outline: none;
+    border-color: var(--rcd-primary);
+    box-shadow: 0 0 0 3px rgba(255, 78, 31, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Filters Container Styling (inside rcd-controls-area) */
+.rcd-filters {
+    position: relative;
+    padding-top: 20px;
+    left: 36%;
+    /* display: flex; */
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    /* Filters are now on the right side of the control area */
+}
+
+.rcd-filters label, .rcd-filters select {
+    font-size: 0.9rem;
+    color: var(--rcd-dark);
+    font-weight: 500;
+}
+
+.rcd-filters select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.rcd-filters select:focus {
+    outline: none;
+    border-color: var(--rcd-primary);
+}
+
+
+/* Table and Scrolling Container */
+.rcd-records-container {
+    padding: 0 20px 20px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.rcd-records-list {
+    width: 100%;
+    max-width: 1200px;
+    background-color: var(--rcd-light);
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Set max-height and overflow-y for scrolling */
+    max-height: 840px; /* Adjust height based on screen size */
+    overflow-y: auto;
+    overflow-x: auto;
+    padding: 0;
+}
+
+.rcd-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.rcd-table th, .rcd-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Make the table header sticky */
+.rcd-table thead {
+    z-index: 1; 
+}
+
+.rcd-table th {
+    background-color: var(--rcd-primary);
+    color: white;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    position: sticky;
+    top: 0; 
+    z-index: 10;
+    box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.2); 
+}
+
+.rcd-table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+.rcd-view-btn {
+    padding: 8px 16px;
+    background-color: var(--rcd-primary);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.rcd-view-btn:hover {
+    background-color: var(--rcd-accent);
+}
+
+.rcd-no-results {
+    text-align: center;
+    color: #888;
+    padding: 20px;
+}

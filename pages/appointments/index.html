@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/3c5078b842.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/appointments.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <title>Appointments | JEFFIX</title>
+</head>
+
+<body>
+    <div id="nav-placeholder">
+
+    </div>
+    <div class="appt-viewer-container">
+        <header class="appt-main-header">
+            <div class="appt-current-date" id="appt-current-date-display"></div>
+        </header>
+
+        <div class="appt-calendar-wrapper">
+            <nav class="appt-nav-section">
+                <button class="appt-nav-btn" id="appt-prev-month-btn">← Previous</button>
+                <h2 class="appt-month-display" id="appt-month-year-display"></h2>
+                <button class="appt-nav-btn" id="appt-next-month-btn">Next →</button>
+            </nav>
+
+            <div class="appt-edit-controls" id="appt-edit-controls">
+                <span class="appt-selected-count" id="appt-selected-count">0 dates selected</span>
+                <button class="appt-edit-btn" id="appt-edit-selected-btn">Edit Selected Dates</button>
+            </div>
+
+            <div class="appt-grid-container" id="appt-calendar-grid">
+                <div class="appt-day-header">Sun</div>
+                <div class="appt-day-header">Mon</div>
+                <div class="appt-day-header">Tue</div>
+                <div class="appt-day-header">Wed</div>
+                <div class="appt-day-header">Thu</div>
+                <div class="appt-day-header">Fri</div>
+                <div class="appt-day-header">Sat</div>
+            </div>
+        </div>
+    </div>
+
+    <button class="appt-fab-btn" id="appt-fab-btn">+</button>
+
+    <div class="appt-details-modal" id="appt-event-modal">
+        <div class="appt-modal-content">
+            <button class="appt-modal-close" id="appt-modal-close-btn">&times;</button>
+            <h3 class="appt-modal-title" id="appt-modal-title"></h3>
+            <div class="appt-modal-info" id="appt-selected-date"></div>
+            <div class="appt-time-slots" id="appt-time-slots-container">
+            </div>
+        </div>
+    </div>
+
+    <div class="appt-details-modal" id="appt-edit-modal">
+        <div class="appt-edit-modal-content">
+            <button class="appt-modal-close" id="appt-edit-modal-close-btn">&times;</button>
+            <h3 class="appt-modal-title">Edit Availability</h3>
+            <div class="appt-modal-info" id="appt-edit-selected-dates"></div>
+            <form id="appt-edit-form">
+                <div class="appt-edit-form-group">
+                    <label class="appt-edit-form-label">Day Status:</label>
+                    <div class="appt-radio-group">
+                        <div class="appt-radio-option">
+                            <input type="radio" id="appt-day-available" name="day_status" value="available" checked>
+                            <label for="appt-day-available">Available</label>
+                        </div>
+                        <div class="appt-radio-option">
+                            <input type="radio" id="appt-day-unavailable" name="day_status" value="unavailable">
+                            <label for="appt-day-unavailable">Unavailable (All Day)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="appt-time-slots-section" id="appt-time-slots-section">
+                    <label class="appt-edit-form-label">Unavailable Time Slots (Check to block):</label>
+                    <div class="appt-time-slots-checkboxes" id="appt-time-slots-checkboxes">
+                        </div>
+                </div>
+
+                <div class="appt-modal-actions">
+                    <button type="button" class="appt-cancel-btn" id="appt-edit-cancel-btn">Cancel</button>
+                    <button type="submit" class="appt-save-btn" id="appt-edit-save-btn">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="appt-details-modal" id="appt-add-new-modal">
+        <div class="appt-add-modal-content">
+            <button class="appt-modal-close" id="appt-add-new-modal-close-btn">&times;</button>
+            <h3 class="appt-modal-title">Schedule New Appointment</h3>
+            <div id="appt-add-status-message" class="appt-modal-info" style="color: #f44336; display: none;"></div>
+            <form id="appt-new-appointment-form">
+                <div class="appt-edit-form-group">
+                    <label class="appt-edit-form-label" for="appt-customer-name-input">Customer:</label>
+                    <div class="appt-search-dropdown-container">
+                        <input type="text" id="appt-customer-name-input" placeholder="Start typing customer name..."
+                            autocomplete="off" required class="appt-form-input">
+                        <ul id="appt-customer-search-results" class="appt-search-results-list">
+                        </ul>
+                    </div>
+                    <input type="hidden" id="appt-selected-customer-name" name="customerName" required>
+                </div>
+
+                <div class="appt-edit-form-group">
+                    <label class="appt-edit-form-label" for="appt-new-date-input">Date:</label>
+                    <input type="date" id="appt-new-date-input" name="appointmentDate" required class="appt-form-input">
+                </div>
+
+                <div class="appt-edit-form-group">
+                    <label class="appt-edit-form-label" for="appt-time-slot-select">Time Slot:</label>
+                    <select id="appt-time-slot-select" name="timeSlot" required class="appt-form-select">
+                    </select>
+                </div>
+
+                <div class="appt-modal-actions">
+                    <button type="button" class="appt-cancel-btn" id="appt-new-cancel-btn">Cancel</button>
+                    <button type="submit" class="appt-save-btn" id="appt-new-save-btn">Save Appointment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="../js/appointments.js"></script>
+<script src="../js/nav.js"></script>
+</html>

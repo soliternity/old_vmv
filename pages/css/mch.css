@@ -1,0 +1,341 @@
+/* mch.css - Styles specific to the Mechanic Dashboard View */
+
+/* --- CSS Variables (Using existing tokens for consistency) --- */
+:root {
+    --primary-color: #FF4E1F;
+    --dark-color: #212121;
+    --light-color: #f7f7f7;
+    --background-color: #E8E6DE;
+    --accent-color: #481E14;
+}
+
+/* --- Titles and Headings --- */
+.mch-title {
+    color: var(--primary-color);
+    font-size: 2rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.mch-icon-main {
+    margin-right: 10px;
+}
+
+.mch-welcome-message {
+    font-size: 1.1rem;
+    color: var(--dark-color);
+    margin-bottom: 30px;
+}
+
+.mch-section-title {
+    color: var(--accent-color);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.mch-subtitle {
+    color: var(--dark-color);
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+/* --- Section and Grid Layouts --- */
+.mch-section {
+    background-color: var(--light-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.mch-grid-container {
+    display: grid;
+    gap: 20px;
+}
+
+/* Top section: Job Stats and Job List (2-column split) */
+.mch-grid-2-cols {
+    grid-template-columns: 2fr 1fr; 
+}
+
+/* Bottom section: Services, Parts, and Chat (3-column split) */
+.mch-grid-3-cols {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+/* --- Panels (Containers within Sections) --- */
+.mch-panel {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    position: relative; 
+}
+
+/* --- Job List Styling --- */
+.mch-job-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+.mch-job-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr; 
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+.mch-priority-high {
+    border-left: 5px solid var(--primary-color);
+    background-color: #ffe5e0; 
+}
+
+.mch-priority-medium {
+    border-left: 5px solid #007bff;
+    background-color: #e0f2ff; 
+}
+
+.mch-car-info {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.mch-service-count {
+    font-weight: 500;
+    text-align: right;
+    color: #4CAF50; 
+}
+
+/* --- Progress Indicator (Unchanged) --- */
+.mch-progress-gauge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.mch-progress-icon {
+    font-size: 3rem;
+    color: #4CAF50; 
+    margin-right: 15px;
+}
+
+.mch-data-progress .mch-data-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #4CAF50;
+    display: block;
+}
+
+.mch-data-progress .mch-data-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.mch-summary-bar {
+    display: flex;
+    height: 10px;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.mch-bar-segment {
+    height: 100%;
+}
+
+.mch-in-progress {
+    background-color: var(--primary-color);
+}
+
+.mch-completed {
+    background-color: #4CAF50;
+}
+
+.mch-status-key span {
+    font-size: 0.85rem;
+    margin-right: 15px;
+    color: var(--dark-color);
+}
+
+.mch-status-key i {
+    font-size: 0.7rem;
+    margin-right: 5px;
+}
+
+/* --- Search Bar & Live Results (MODIFIED) --- */
+.mch-search-container {
+    margin-bottom: 0; 
+}
+
+.mch-search-input {
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    font-size: 1rem;
+}
+
+.mch-search-results-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    /* User requested position */
+    top: calc(100% - 60px); 
+    left: 20px;
+    right: 20px;
+    z-index: 10;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.mch-result-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.95rem;
+    cursor: pointer;
+    color: var(--dark-color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mch-result-item:hover {
+    background-color: #f7f7f7;
+    color: var(--primary-color);
+}
+
+.mch-no-results {
+    color: #999;
+    font-style: italic;
+    cursor: default;
+}
+
+/* --- Detail View Modal (NEW) --- */
+.mch-hidden {
+    display: none !important;
+}
+
+.mch-detail-view {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    border-top: 5px solid var(--primary-color);
+}
+
+.mch-detail-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s;
+}
+
+.mch-detail-close:hover {
+    color: var(--primary-color);
+}
+
+.mch-detail-content p {
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.mch-detail-content strong {
+    color: var(--accent-color);
+    margin-right: 5px;
+    font-weight: 600;
+}
+
+/* --- Chat Widget (Unchanged) --- */
+.mch-chat-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+.mch-chat-item {
+    padding: 10px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer; 
+}
+
+.mch-chat-item:last-child {
+    border-bottom: none;
+}
+
+.mch-chat-name {
+    font-weight: bold;
+    display: block;
+    color: var(--accent-color);
+    font-size: 0.95rem;
+}
+
+.mch-chat-unread {
+    background-color: #fff8e1; 
+    border-left: 3px solid var(--primary-color);
+    padding-left: 7px;
+}
+
+.mch-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 1200px) {
+    .mch-grid-3-cols {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .mch-grid-2-cols,
+    .mch-grid-3-cols {
+        grid-template-columns: 1fr;
+    }
+    .mch-panel {
+        position: static;
+    }
+    .mch-search-results-list {
+        position: static;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+    /* Detail View on mobile */
+    .mch-detail-view {
+        width: 95%;
+        top: 20px;
+        transform: translate(-50%, 0);
+    }
+}

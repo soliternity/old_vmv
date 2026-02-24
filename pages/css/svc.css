@@ -1,0 +1,393 @@
+/* --- New Header Styles --- */
+.svc-main-header {
+    /* Mimics the original .stf-header styling */
+    display: flex;
+     /* Space out title and search */
+    padding: 1.5rem 2rem;
+    /* Using variables based on existing file colors */
+    background-color: #E8E6DE; /* Assuming this is your card/body background */
+    border-bottom: 1px solid #ddd; /* Using a light color for border from existing file */
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Added subtle shadow for stickiness */
+    width: 100%;
+    /* max-width: 900px; */
+    margin: 0 auto;
+    /* Ensures the header sits outside the main container's margin */
+    align-items: center;
+    background: #f7f7f7;
+}
+
+.svc-header-title {
+    /* "Services/Repairs" on the left side using the primary color */
+    color: #FF4E1F; /* primary-color assumed from existing button styles (FF4E1F) */
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    flex-shrink: 0; /* Prevents shrinking */
+    padding-right: 1rem;
+    left: 78px;
+    position:  relative;
+}
+
+.svc-header-search {
+    /* flex-grow: 0.5; */
+    position: fixed;
+    display: flex;
+    justify-content: flex-end; /* Pushes the search box to the right */
+    left: calc(50% - 156px);
+}
+
+/* Original search input styles (using the ID #stf-search-input from the prompt) */
+#stf-search-input {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #481E14; /* Using text-color based on existing file */
+    border-radius: 30px;
+    font-size: 1rem;
+    width: 100%;
+    max-width: 300px; /* Limits size on desktop */
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    background-color: #fff;
+    position: relative;
+}
+
+#stf-search-input:focus {
+    outline: none;
+    border-color: #FF4E1F; /* primary-color */
+    box-shadow: 0 0 0 3px rgba(255, 78, 31, 0.2);
+}
+
+@media (max-width: 768px) {
+    .svc-main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem 1rem;
+    }
+    .svc-header-title {
+        margin-bottom: 0.5rem;
+    }
+    .svc-header-search {
+        width: 100%;
+        justify-content: center;
+    }
+    #stf-search-input {
+        width: 100%;
+        max-width: none;
+    }
+}
+/* --- End New Header Styles --- */
+
+
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-color: #E8E6DE;
+    color: #212121;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Changed to column to stack header above container */
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.svc-container {
+    /* Removed fixed left: 40px and adjusted height calculation */
+    width: 100%;
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #E8E6DE;
+    border-radius: 8px;
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */ /* Removed shadow as header now has it */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Adjust height calculation to account for the new sticky header (approx 70px height) */
+    height: auto;
+    min-height: calc(100vh - 150px);
+    /* position: relative; */
+    /* left: 0; */
+}
+
+h1,
+h2 {
+    text-align: center;
+    color: #481E14;
+}
+
+/* Remove old search filter styles as it is now in the header */
+.svc-search-filter {
+    display: none; 
+}
+
+/* Services List */
+.svc-list {
+    list-style: none;
+    padding: 0 20px;
+    margin: 0;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+.svc-item {
+    background-color: #fff;
+    border: 1px solid #E8E6DE;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.svc-list .svc-item:last-child {
+    margin-bottom: 20px;
+}
+
+.svc-item:hover {
+    transform: translateY(-5px);
+}
+
+.svc-content {
+    flex-grow: 1;
+    cursor: pointer;
+}
+
+.svc-content h3 {
+    margin: 0 0 5px 0;
+    color: #212121;
+}
+
+.svc-content p {
+    margin: 0;
+    color: #481E14;
+}
+
+/* Edit/Delete Buttons */
+.svc-actions {
+    display: none;
+    /* Initially hidden */
+    gap: 10px;
+}
+
+.svc-actions button {
+    background: none;
+    border: 1px solid #E8E6DE;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.svc-actions .svc-edit-btn {
+    background-color: #481E14;
+    color: #f7f7f7;
+}
+
+.svc-actions .svc-edit-btn:hover {
+    background-color: #66382a;
+}
+
+.svc-actions .svc-delete-btn {
+    background-color: #FF4E1F;
+    color: #fff;
+}
+
+.svc-actions .svc-delete-btn:hover {
+    background-color: #E8451F;
+}
+
+/* Add Service Button */
+#svc-add-btn {
+    display: none;
+    /* Initially hidden */
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #481E14;
+    color: #fff;
+    border-radius: 50%;
+    border: none;
+    font-size: 40px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+    z-index: 20;
+}
+
+#svc-add-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Overlays and Modals */
+.svc-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(33, 33, 33, 0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.svc-modal {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    transform: scale(0.95);
+    transition: transform 0.3s ease-out;
+}
+
+.svc-overlay.svc-active .svc-modal {
+    transform: scale(1);
+}
+
+.svc-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: 300;
+    color: #481E14;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.svc-modal-close:hover {
+    color: #FF4E1F;
+}
+
+.svc-modal-title {
+    color: #FF4E1F;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.svc-modal p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    color: #212121;
+    font-size: 16px;
+}
+
+.svc-modal-title-small {
+    color: #481E14;
+    font-size: 20px;
+    margin: 0;
+}
+
+.svc-modal-content-container {
+    margin-top: 20px;
+}
+
+/* Form Specific Styles (for Add and Edit) */
+.svc-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #481E14;
+    font-weight: bold;
+}
+
+.svc-form input,
+.svc-form textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #E8E6DE;
+    border-radius: 4px;
+}
+
+.svc-form textarea {
+    resize: vertical;
+}
+
+.svc-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.svc-form-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.svc-form-actions .svc-save-btn {
+    background-color: #481E14;
+    color: #f7f7f7;
+}
+
+.svc-form-actions .svc-cancel-btn {
+    background-color: #E8E6DE;
+    color: #212121;
+}
+
+/* Delete Confirmation Modal Specific Styles */
+.svc-delete-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.svc-delete-modal-actions button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.svc-delete-modal-actions .svc-confirm-delete-btn {
+    background-color: #FF4E1F;
+    color: #fff;
+}
+
+.svc-delete-modal-actions .svc-cancel-delete-btn {
+    background-color: #E8E6DE;
+    color: #212121;
+}
+
+/* JavaScript styling for active state */
+.svc-active-item {
+    border: 2px solid #FF4E1F;
+    box-shadow: 0 0 10px rgba(255, 78, 31, 0.5);
+}
+
+.svc-hidden {
+    display: none;
+}
+
+/* Dynamic classes for showing/hiding buttons */
+.admin-mode .svc-actions {
+    display: flex;
+}
+
+.admin-mode #svc-add-btn {
+    display: flex;
+}

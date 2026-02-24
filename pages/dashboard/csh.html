@@ -1,0 +1,86 @@
+<div class="dashboard-view csh-view">
+    <section class="csh-section csh-summary-actions">
+        <h3 class="csh-section-title">Daily Operations</h3>
+        <div class="csh-grid-container csh-grid-3-cols">
+
+            <div class="csh-widget csh-billing-pending">
+                <i class="fas fa-file-invoice csh-icon"></i>
+                <div class="csh-data">
+                    <span class="csh-data-value">0</span>
+                    <span class="csh-data-label">Billing Invoices To Process</span>
+                </div>
+            </div>
+
+            <div class="csh-widget csh-appointments">
+                <i class="fas fa-calendar-check csh-icon"></i>
+                <div class="csh-data">
+                    <span class="csh-data-value">0</span>
+                    <span class="csh-data-label">Appointments Today</span>
+                </div>
+            </div>
+
+            <div class="csh-widget csh-job-orders">
+                <i class="fas fa-tools csh-icon"></i>
+                <div class="csh-data">
+                    <span class="csh-data-value">0</span>
+                    <span class="csh-data-label">Ongoing Job Orders</span>
+                </div>
+                <div class="csh-sub-data">
+                    <span>Pending: 0</span> | <span>Ongoing: 0</span> | <span>Completed: 0</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="csh-section csh-pricing-tools">
+        <h3 class="csh-section-title">Pricing & Quick Access</h3>
+        <div class="csh-grid-container csh-grid-3-cols">
+
+            <div class="csh-panel csh-pricing-panel">
+                <h4 class="csh-subtitle"><i class="fas fa-search"></i> Service/Repair Pricing</h4>
+                <input type="text" id="serviceSearchInput" placeholder="Search Service Name..." class="csh-search-input">
+                <a href="../services" id="serviceSearchBtn" class="csh-action-btn csh-view-btn">
+                    <i class="fas fa-angle-right"></i> View Service/Repairs List
+                </a>
+                <div id="servicesResultsContainer" class="csh-results-list">
+                    <p class="csh-initial-msg">Type a search term to find a service or part.</p>
+                </div>
+            </div>
+
+            <div class="csh-panel csh-pricing-panel">
+                <h4 class="csh-subtitle"><i class="fas fa-wrench"></i> Vehicle Parts Pricing</h4>
+                <input type="text" id="partsSearchInput" placeholder="Search Part Name/SKU..." class="csh-search-input">
+                <a href="../parts" id="partsSearchBtn" class="csh-action-btn csh-view-btn">
+                    <i class="fas fa-angle-right"></i> View Vehicle Parts List
+                </a>
+                <div id="partsResultsContainer" class="csh-results-list">
+                    <p class="csh-initial-msg">Type a search term to find a service or part.</p>
+                </div>
+            </div>
+
+            <div class="csh-panel csh-quick-links">
+                <h4 class="csh-subtitle"><i class="fas fa-link"></i> Shortcuts</h4>
+                <a href="../billing-%26-invoices" class="csh-action-btn csh-link-btn"
+                    onclick="console.log('Navigating to Billing/Invoices.');">
+                    <i class="fas fa-file-invoice"></i> Billing/Invoices
+                </a>
+                <a href="../appointments" class="csh-action-btn csh-link-btn"
+                    onclick="console.log('Navigating to Appointments.');">
+                    <i class="fas fa-calendar-alt"></i> Appointments Calendar
+                </a>
+                <a href="../transaction-history" class="csh-action-btn csh-link-btn"
+                    onclick="console.log('Navigating to Transaction History Report.');">
+                    <i class="fas fa-history"></i> Transaction History
+                </a>
+            </div>
+        </div>
+    </section>
+</div>
+
+<div id="cshOverlayModal" class="csh-overlay-modal" style="display: none;">
+    <div class="csh-modal-content">
+        <span class="csh-modal-close" onclick="closeCshModal()">&times;</span>
+        <div id="cshModalBody" class="csh-modal-body">
+            </div>
+    </div>
+</div>

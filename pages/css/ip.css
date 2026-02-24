@@ -1,0 +1,349 @@
+/* Custom IP Colors */
+:root {
+    --primary-color: #FF4E1F; 
+    --dark-color: #212121;    
+    --light-color: #f7f7f7;   
+    --background-color: #E8E6DE; 
+    --accent-color: #481E14;  
+    --card-bg: #FFFFFF;     /* Referenced from jo-card-bg */
+    --card-hover: #F9F9F9;  /* Referenced from jo-card-hover */
+}
+
+/* Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--dark-color);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; 
+}
+
+/* -------------------- Header & Controls -------------------- */
+.ip-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background-color: var(--light-color);
+    border-bottom: 1px solid var(--dark-color);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ip-header-title {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    flex-shrink: 0;
+    position: absolute;
+    left: 78px;
+    padding-left: 1rem;
+}
+
+.ip-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center; 
+    width: 100%;
+}
+
+#ip-search-input {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--dark-color);
+    border-radius: 30px;
+    font-size: 1rem;
+    width: 250px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    background-color: white;
+}
+
+#ip-search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 78, 31, 0.2);
+}
+
+.ip-content-container {
+    flex-grow: 1;
+    padding: 2rem;
+}
+
+/* -------------------- Table Styles (Adapted from jbs.css) -------------------- */
+.ip-table-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    /* SCROLLING LOGIC: Whole container scrolls, header is sticky inside */
+    max-height: 900px; /* Set a max height for scrollability */
+    overflow-y: auto; /* Enable vertical scrolling */
+    overflow-x: hidden;
+    
+    background-color: var(--card-bg); /* From jo-card-bg */
+    border-radius: 10px; /* From jbs.css */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+#ip-list-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Sticky Header inside scrollable container and rounded corners */
+#ip-list-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-radius: 10px 10px 0 0;
+    overflow: hidden; 
+}
+
+#ip-list-table thead th {
+    background-color: var(--primary-color); 
+    color: white;
+    padding: 15px; /* From jbs.css */
+    text-align: left;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* Rounded corners for first and last th (from jbs.css) */
+#ip-list-table thead tr th:first-child {
+    border-top-left-radius: 10px;
+}
+#ip-list-table thead tr th:last-child {
+    border-top-right-radius: 10px;
+}
+
+#ip-list-table tbody tr {
+    border-bottom: 1px solid #eee; /* From jbs.css */
+    transition: background-color 0.2s ease;
+}
+
+#ip-list-table tbody tr:hover {
+    background-color: var(--card-hover); /* From jo-card-hover */
+}
+
+#ip-list-table td {
+    padding: 12px 15px; /* From jbs.css */
+    vertical-align: middle;
+    color: var(--dark-color);
+    
+    /* Alignment/Clipping requirements (non-fixed width) */
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Max-Width Hints (Non-fixed, Non-Content Adjusted) */
+#ip-list-table th:nth-child(1), #ip-list-table td:nth-child(1) { max-width: 30%; } 
+#ip-list-table th:nth-child(2), #ip-list-table td:nth-child(2) { max-width: 20%; } 
+#ip-list-table th:nth-child(3), #ip-list-table td:nth-child(3) { max-width: 15%; } 
+#ip-list-table th:nth-child(4), #ip-list-table td:nth-child(4) { max-width: 25%; } 
+/* Action column ensures enough space for text buttons */
+#ip-list-table th:nth-child(5), #ip-list-table td:nth-child(5) { max-width: 150px; min-width: 150px; } 
+
+
+/* Action Buttons (Text-based) */
+.ip-actions-cell {
+    white-space: nowrap;
+}
+
+.ip-edit-btn,
+.ip-delete-btn {
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.75rem;
+    margin: 0 0.2rem;
+    border-radius: 4px;
+    transition: background-color 0.2s, transform 0.2s;
+    line-height: 1;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: white;
+}
+
+.ip-edit-btn {
+    background-color: var(--accent-color); 
+}
+.ip-edit-btn:hover {
+    background-color: #2e150f;
+    transform: translateY(-1px);
+}
+
+.ip-delete-btn {
+    background-color: var(--primary-color); 
+}
+.ip-delete-btn:hover {
+    background-color: #d13c19;
+    transform: translateY(-1px);
+}
+
+
+/* -------------------- FAB Button (Add) -------------------- */
+.ip-add-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border-radius: 50%;
+    border: none;
+    font-size: 1.8rem;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, background-color 0.2s;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 1;
+}
+
+.ip-add-btn:hover {
+    transform: scale(1.1);
+    background-color: var(--accent-color);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* -------------------- Overlay Styles -------------------- */
+.ip-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.ip-overlay-content {
+    background-color: white; 
+    padding: 2.5rem;
+    border-radius: 12px;
+    width: 450px;
+    max-width: 90%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    position: relative;
+    animation: fadeIn 0.3s ease-out;
+    text-align: center;
+}
+
+.ip-overlay-close {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s;
+}
+
+.ip-overlay-close:hover {
+    color: var(--primary-color);
+}
+
+.ip-overlay-content input, .ip-overlay-content select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--light-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+.ip-overlay-content label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    text-align: left;
+}
+.input-group {
+    margin-bottom: 1rem;
+}
+
+/* Confirmation/Modal Button Styles */
+.confirmation-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.confirmation-buttons button, .ip-overlay-content form button {
+    flex: 1;
+    padding: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.ip-confirm-btn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.ip-confirm-btn:hover {
+    background-color: #d13c19;
+}
+
+.ip-cancel-btn {
+    background-color: #6c757d;
+    color: white;
+}
+
+.ip-cancel-btn:hover {
+    background-color: #5a6268;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* -------------------- Message/Error Display (New) -------------------- */
+.ip-message-area {
+    padding: 10px;
+    margin: 10px 0 15px 0;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    display: none; /* Hidden by default */
+}
+
+.ip-message-error {
+    background-color: #ffe6e6; /* Light red */
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.ip-message-success {
+    background-color: #e6ffe6; /* Light green */
+    color: #38761d;
+    border: 1px solid #38761d;
+}

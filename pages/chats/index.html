@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script
+      src="https://kit.fontawesome.com/3c5078b842.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../css/nav.css" />
+    <link rel="stylesheet" href="../css/chat.css" />
+    <title>Chats | JEFFIX</title>
+    <style>
+      /* --- ORIGINAL STYLES --- */
+      body {
+        position: relative;
+        left: 78px;
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background: #f4f6fa;
+        display: flex;
+        height: 100vh;
+        height: 100vh;
+        min-height: 100vh;
+        max-height: 100vh;
+        width: calc(100vw - 70px);
+        overflow: hidden;
+      }
+      html,
+      body {
+        height: 100%;
+        overflow: hidden;
+      }
+      .container {
+        display: flex;
+        background: #f4f6fa;
+        height: 100vh;
+        min-height: 100vh;
+        max-height: 100vh;
+        width: calc(100vw - 70px);
+        overflow: hidden;
+      }
+      .sidebar {
+        width: 280px;
+        background: #212121;
+        color: #f1f4f9;
+        overflow-y: auto;
+        border-right: 1px solid #202736;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.03);
+        height: 100vh;
+        min-height: 100vh;
+        max-height: 100vh;
+        overflow: hidden;
+      }
+      .sidebar h2 {
+        padding: 1rem;
+        font-size: 1.2rem;
+        border-bottom: 1px solid #202736;
+        letter-spacing: 1px;
+        color: #f1f4f9;
+        background: #212121;
+        margin: 0;
+      }
+      .conversation-item {
+        padding: 1rem 1.2rem;
+        border-bottom: 1px solid #212121;
+        cursor: pointer;
+        color: #f1f4f9;
+        background: none;
+        transition: background 0.15s;
+        outline: none;
+      }
+      .conversation-item:hover,
+      .conversation-item:focus {
+        background: #29344a;
+      }
+      .conversation-item.active {
+        background: #ff4e1f; /* Adjusted to match your header color for consistency */
+        color: #fff;
+        font-weight: bold;
+      }
+      .chat-area {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        background: #f9fafb;
+        border-radius: 0 8px 8px 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        border-left: 1px solid #f7f7f7;
+        height: 100vh;
+        min-height: 100vh;
+        max-height: 100vh;
+        overflow: hidden;
+      }
+      .chat-header {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #f7f7f7;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #ff4e1f;
+        border-radius: 0 8px 0 0;
+        color: #f7f7f7;
+      }
+      .chat-messages {
+        flex: 1;
+        padding: 1.2rem 2rem;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        background: #e8e6de;
+        min-height: 0;
+        max-height: calc(100vh - 120px);
+        overflow: auto;
+      }
+      .message {
+        max-width: 55%;
+        padding: 0.7rem 1.2rem;
+        border-radius: 16px;
+        line-height: 1.5;
+        word-wrap: break-word;
+        box-shadow: 0 1px 4px rgba(49, 130, 206, 0.07);
+        font-size: 1rem;
+        font-family: inherit;
+        transition: background 0.15s;
+        background: #f1f4f9;
+      }
+      .msg-user {
+        align-self: flex-end;
+        background: linear-gradient(90deg, #ff4e1f 80%, #ff4e1f 100%);
+        color: #fff;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 16px;
+        border-top-right-radius: 16px;
+        border-top-left-radius: 16px;
+      }
+      .msg-peer {
+        align-self: flex-start;
+        background: #f7f7f7;
+        color: #212121;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 16px;
+        border-top-right-radius: 16px;
+        border-top-left-radius: 16px;
+      }
+      .chat-input {
+        display: flex;
+        padding: 1rem 1.5rem;
+        border-top: 1px solid #f7f7f7;
+        background: #f7f7f7;
+        border-radius: 0 0 8px 0;
+        /* Ensure buttons and input align */
+        align-items: center; 
+      }
+      .chat-input input[type="text"] {
+        flex: 1;
+        position: relative;
+        left: 20px;
+        max-width: 85%;
+        padding: 0.7rem 1.2rem;
+        font-size: 1rem;
+        border: 1px solid #f7f7f7;
+        border-radius: 20px;
+        outline: none;
+        background: #fff;
+        color: #212121;
+        transition: border 0.15s;
+      }
+      .chat-input input[type="text"]:focus {
+        border: 1.5px solid #ff4e1f;
+      }
+      .chat-input button {
+        margin-left: 30px;
+        padding: 0.7rem 1.5rem;
+        background: linear-gradient(90deg, #ff4e1f 80%, #ff4e1f 100%);
+        color: white;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 1rem;
+        box-shadow: 0 1px 2px rgba(49, 130, 206, 0.07);
+        transition: background 0.15s;
+      }
+      .chat-input button:disabled {
+        background: #c7aea7;
+        cursor: not-allowed;
+        position: relative;
+        /* left: 20px; */
+      }
+      .chat-header button {
+        background: #e53e3e;
+        border: none;
+        padding: 6px 18px;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 1rem;
+        box-shadow: 0 1px 2px rgba(229, 62, 62, 0.07);
+        transition: background 0.15s;
+      }
+      .chat-header button:hover {
+        background: #c53030;
+      }
+      /* Hide scrollbars for all browsers */
+      .sidebar,
+      .chat-messages {
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+      }
+      .sidebar::-webkit-scrollbar,
+      .chat-messages::-webkit-scrollbar {
+        display: none;
+      }
+      .message-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+      }
+      .message-container.user-message-container {
+        align-items: flex-end;
+      }
+      .timestamp {
+        font-size: 0.8rem;
+        color: #888;
+        margin-top: 5px;
+      }
+
+      /* Modal Overlay Styles (kept original) */
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        display: none; /* Hide by default */
+      }
+      .modal {
+        background: white;
+        padding: 2rem;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        font-family: "Segoe UI", sans-serif;
+      }
+      .modal h3 {
+        margin-top: 0;
+        font-size: 1.2rem;
+        color: #333;
+      }
+      .modal p {
+        color: #555;
+      }
+      .modal-buttons {
+        margin-top: 1.5rem;
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+      .modal-buttons button {
+        padding: 0.5rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      #confirmYes {
+        background: #e53e3e;
+        color: white;
+      }
+      #confirmNo {
+        background: #eee;
+        color: #333;
+      }
+
+      /* --- NEW SEARCH FUNCTIONALITY STYLES (Integrated) --- */
+      .search-btns {
+        display: flex;
+        margin-right: 5px;
+        /* Adjusted for the dark input background */
+        background: #fff;
+        border-radius: 20px;
+        padding: 0 20px;
+        margin-right: -15px; /* Pull into the chat-input padding */
+        z-index: 10;
+        position: relative;
+      }
+      .search-btns button {
+        background: none;
+        border: none;
+        color: #ff4e1f; /* Use your main accent color */
+        font-size: 1.2em;
+        padding: 0.7rem 0.5rem;
+        cursor: pointer;
+        transition: color 0.2s;
+        margin-left: 5px; /* Adjusted to fit the flow */
+        outline: none;
+        margin-right: 0; /* Remove right margin from button */
+      }
+      .search-btns button:hover {
+        color: #e53e3e; /* Use your delete/hover color */
+      }
+
+      /* Search Modal styles (Uses original modal structure, but expanded width) */
+      .search-modal {
+        width: 450px;
+        max-width: 90%;
+        text-align: left;
+        padding: 1.5rem;
+      }
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+      }
+      .close-btn {
+        background: none;
+        border: none;
+        font-size: 1.8em;
+        cursor: pointer;
+        color: #aaa;
+        padding: 0;
+        line-height: 1;
+      }
+      .search-tabs {
+        display: flex;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #ddd;
+      }
+      .tab-btn {
+        padding: 8px 12px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 1em;
+        color: #555;
+        transition: color 0.2s;
+        outline: none;
+      }
+      .tab-btn.active {
+        color: #ff4e1f;
+        border-bottom: 2px solid #ff4e1f;
+        font-weight: bold;
+      }
+      #serviceSearchInput,
+      #partSearchInput {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+      .search-tab-content {
+        display: none;
+      }
+      .search-tab-content.active {
+        display: block;
+      }
+      .search-results-list {
+        max-height: 300px;
+        overflow-y: auto;
+        border: 1px solid #eee;
+        border-radius: 5px;
+        padding: 5px;
+        background: #f9f9f9;
+      }
+      .search-placeholder {
+        text-align: center;
+        color: #888;
+        padding: 10px;
+      }
+      .search-result-item {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .search-result-item:last-child {
+        border-bottom: none;
+      }
+      .search-result-item:hover {
+        background: #ffebe5; /* Light orange hover for visibility */
+      }
+      .result-name {
+        font-weight: bold;
+        color: #ff4e1f; /* Accent color */
+      }
+      .result-description {
+        font-size: 0.9em;
+        color: #666;
+        white-space: pre-wrap;
+        margin-top: 5px;
+      }
+      .result-cost-hours {
+        font-size: 0.8em;
+        color: #333;
+        margin-top: 5px;
+      }
+      /* End of NEW SEARCH FUNCTIONALITY STYLES */
+    </style>
+  </head>
+  <body>
+    <div id="nav-placeholder"></div>
+    <div class="container">
+      <aside class="sidebar">
+        <h2>Conversations</h2>
+        <div id="convList"></div>
+      </aside>
+
+      <main class="chat-area">
+        <div class="chat-header">
+          <span id="msgHeader">Select a conversation</span>
+        </div>
+
+        <div class="chat-messages" id="msgList">
+          <p style="text-align: center; color: #888">
+            Please select a conversation to see messages.
+          </p>
+        </div>
+
+        <form class="chat-input" id="msgForm" style="display: none">
+          <div class="search-btns">
+            <button type="button" id="searchServiceBtn" title="Search Services">
+              <i class="fas fa-tools"></i>
+            </button>
+            <button type="button" id="searchPartBtn" title="Search Parts">
+              <i class="fas fa-cogs"></i>
+            </button>
+          </div>
+          <input
+            type="text"
+            id="msgInput"
+            placeholder="Type a message..."
+            maxlength="500"
+            autocomplete="off"
+          />
+          <button type="submit" id="sendBtn" disabled>Send</button>
+        </form>
+      </main>
+    </div>
+
+    <div class="overlay" id="confirmOverlay">
+      <div class="modal">
+        <h3 id="modalTitle">Confirm Action</h3>
+        <p id="modalMessage">Are you sure you want to mark this conversation as done?</p>
+        <div class="modal-buttons">
+          <button id="confirmYes">Yes</button>
+          <button id="confirmNo">No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="overlay" id="searchOverlay">
+      <div class="modal search-modal">
+        <div class="modal-header">
+          <h3 id="searchModalTitle">Search Service/Part</h3>
+          <button type="button" class="close-btn" id="closeSearchModal">
+            &times;
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="search-tabs">
+            <button
+              class="tab-btn active"
+              data-target="serviceSearch"
+              id="serviceTabBtn"
+            >
+              Services
+            </button>
+            <button class="tab-btn" data-target="partSearch" id="partTabBtn">
+              Parts
+            </button>
+          </div>
+
+          <div class="search-tab-content active" id="serviceSearch">
+            <input
+              type="text"
+              id="serviceSearchInput"
+              placeholder="Search by service name or description..."
+            />
+            <div class="search-results-list" id="serviceResults">
+              <p class="search-placeholder">
+                Start typing to search for services.
+              </p>
+            </div>
+          </div>
+
+          <div class="search-tab-content" id="partSearch">
+            <input
+              type="text"
+              id="partSearchInput"
+              placeholder="Search by part name or description..."
+            />
+            <div class="search-results-list" id="partResults">
+              <p class="search-placeholder">
+                Start typing to search for parts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/nav.js"></script>
+    <script src="../js/chat.js"></script>
+  </body>
+</html>

@@ -1,0 +1,144 @@
+/* adm.css - Styles specific to the Admin Dashboard View */
+
+/* --- CSS Variables (Imported from dsh.css for consistency) --- */
+:root {
+    --primary-color: #FF4E1F;
+    --dark-color: #212121;
+    --light-color: #f7f7f7;
+    --background-color: #E8E6DE;
+    --accent-color: #481E14;
+}   
+
+.adm-title {
+    color: var(--primary-color);
+    font-size: 2rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.adm-welcome-message {
+    font-size: 1.1rem;
+    color: var(--dark-color);
+    margin-bottom: 30px;
+}
+
+/* --- Section Styling --- */
+.adm-section {
+    background-color: var(--light-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.adm-section-title {
+    color: var(--accent-color);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* --- Grid for Summary Widgets --- */
+.adm-grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.adm-grid-2-cols {
+    grid-template-columns: 1.5fr 1fr; /* Metrics on the left, Links on the right */
+}
+
+/* --- Widget Styling --- */
+.adm-widget {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-left: 5px solid var(--primary-color); /* Default color for left border */
+}
+
+.adm-icon {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.adm-icon-main {
+    margin-right: 10px;
+}
+
+.adm-data {
+    margin-bottom: 5px;
+}
+
+.adm-data-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--dark-color);
+    display: block;
+}
+
+.adm-data-label {
+    font-size: 0.9rem;
+    color: #666;
+    display: block;
+    margin-top: -5px; /* Adjust spacing */
+}
+
+.adm-sub-data {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    padding-top: 5px;
+    border-top: 1px dashed rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+/* --- Management Links Styling --- */
+.adm-subtitle {
+    color: var(--dark-color);
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.adm-management-btn {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.adm-management-btn a {
+    color: var(--light-color); /* Ensure the link text remains white */
+    text-decoration: none;
+    pointer-events: none; /* Prevents link from being clickable, letting the button's JS handle navigation */
+}
+
+.adm-management-btn:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-1px);
+}
+
+.adm-management-btn i {
+    margin-right: 10px;
+}
+
+.adm-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}

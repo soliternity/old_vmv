@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/svc.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Services & Repairs | JEFFIX</title>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <!-- NEW STICKY HEADER REPLACING THE OLD STRUCTURE -->
+    <header class="svc-main-header">
+        <h1 class="svc-header-title">Services/Repairs</h1>
+        <div class="svc-header-search">
+            <!-- Renamed ID to match the old search style properties, but kept the svc-search class for JS functionality -->
+            <input type="text" id="stf-search-input" class="svc-search-input" placeholder="Search service/repair...">
+        </div>
+    </header>
+    <!-- END NEW STICKY HEADER -->
+
+    <div class="svc-container">
+        <!-- Removed the old svc-search-filter div to use the one in the main header -->
+        <ul class="svc-list" id="svc-services-list">
+        </ul>
+        <div class="svc-actions">
+            <button id="svc-add-btn">+</button>
+        </div>
+    </div>
+
+    <div id="svc-view-overlay" class="svc-overlay">
+        <div id="svc-view-modal" class="svc-modal">
+            <span class="svc-modal-close" id="svc-view-close">&times;</span>
+            <h2 class="svc-modal-title">Service/Repair Details</h2>
+            <div class="svc-modal-content-container">
+                <p><span class="svc-modal-title-small">Name:</span> <span id="view-modal-name"></span></p>
+                <p><span class="svc-modal-title-small">Cost:</span> <span id="view-modal-cost"></span></p>
+                <p><span class="svc-modal-title-small">Estimated hours:</span> <span id="view-modal-hours"></span></p>
+                <p><span class="svc-modal-title-small">Description:</span> <span id="view-modal-description"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="svc-form-overlay" class="svc-overlay">
+        <div id="svc-form-modal" class="svc-modal">
+            <span class="svc-modal-close" id="svc-form-close">&times;</span>
+            <h2 class="svc-modal-title" id="svc-form-title">Add New Service</h2>
+            <form id="svc-form" class="svc-form">
+                <label for="svc-name">Name:</label>
+                <input type="text" id="svc-name" name="name" required>
+
+                <label for="svc-cost-min">Min Cost (₱):</label>
+                <input type="number" id="svc-cost-min" name="cost-min" required>
+
+                <label for="svc-cost-max">Max Cost (₱):</label>
+                <input type="number" id="svc-cost-max" name="cost-max" required>
+
+                <label for="svc-hours-min">Min Hours:</label>
+                <input type="number" id="svc-hours-min" name="hours-min" required>
+
+                <label for="svc-hours-max">Max Hours:</label>
+                <input type="number" id="svc-hours-max" name="hours-max" required>
+
+                <label for="svc-description">Description:</label>
+                <textarea id="svc-description" name="description" rows="5" required></textarea>
+
+                <div class="svc-form-actions">
+                    <button type="submit" class="svc-save-btn">Save</button>
+                    <button type="button" class="svc-cancel-btn" id="svc-form-cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="svc-delete-overlay" class="svc-overlay">
+        <div id="svc-delete-modal" class="svc-modal">
+            <span class="svc-modal-close" id="svc-delete-close">&times;</span>
+            <h2 class="svc-modal-title">Confirm Deletion</h2>
+            <p>Are you sure you want to delete the service "<b id="delete-service-name"></b>"?</p>
+            <div class="svc-delete-modal-actions">
+                <button class="svc-confirm-delete-btn">Yes, Delete</button>
+                <button class="svc-cancel-delete-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="../js/nav.js"></script>
+    <script src="../js/svc.js"></script>
+
+
+</body>
+
+</html>

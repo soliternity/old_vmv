@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/gr.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <title>Performance Reports | JEFFIX</title>
+</head>
+
+<body>
+    <div id="nav-placeholder">
+
+    </div>
+
+    <div class="gr-header">
+        <h1 class="gr-header-title">Performance Reports</h1>
+        <input type="text" id="gr-search-input" placeholder="Search reports...">
+    </div>
+
+    <div class="gr-filters">
+        <label for="gr-filter-type" class="gr-filter-label">Filter by Type:</label>
+        <select id="gr-filter-type" class="gr-dropdown-filter">
+            <option value="" selected disabled>Select report type</option>
+            <option value="transactions">Transactions</option>
+            <option value="service-repairs">Service/Repairs</option>
+        </select>
+    </div>
+
+    <div id="report-container" class="report-container">
+        <div id="report-summary" class="report-summary"></div>
+        <div id="report-list" class="report-list"></div>
+    </div>
+    
+    <div id="pdf-viewer-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <iframe id="pdf-viewer-iframe" style="width: 100%; height: 80vh;" frameborder="0"></iframe>
+        </div>
+    </div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+<script src="../js/nav.js"></script>
+<script src="../js/gr.js"></script>
+
+</html>

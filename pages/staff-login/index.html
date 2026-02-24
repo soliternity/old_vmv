@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Staff Login | JEFFIX</title>
+    <link rel="stylesheet" href="../css/jfx.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="login-wrapper">
+      <div class="login-container" role="main" aria-label="Login form">
+        <!-- 🔙 Go Back Button -->
+        <button
+          onclick="window.history.back()"
+          class="btn-back"
+          aria-label="Go back to the previous page"
+        >
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+
+        <div class="brand-header">
+          <h1 class="brand-name">
+            <span class="brand-icon"><i class="fa-solid fa-cube"></i></span>
+            JEFFIX
+          </h1>
+          <p class="brand-tagline">Please login to your employee account.</p>
+        </div>
+
+        <form id="loginForm" novalidate>
+          <div class="input-field">
+            <label for="username">
+              <i class="fa-solid fa-user"></i>
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              autocomplete="username"
+              placeholder="Enter your username"
+              required
+              aria-required="true"
+            />
+          </div>
+
+          <div class="input-field">
+            <label for="password">
+              <i class="fa-solid fa-lock"></i>
+              Password
+            </label>
+            <div class="input-group">
+              <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="current-password"
+                placeholder="Enter your password"
+                required
+                aria-required="true"
+              />
+              <span
+                class="toggle-password"
+                aria-label="Toggle password visibility"
+                role="button"
+                tabindex="0"
+              >
+                <i class="fa-solid fa-eye-slash"></i>
+              </span>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn-login"
+            aria-label="Log in to your account"
+          >
+            <span class="btn-text">Log In</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+
+          <div
+            id="invalidMsg"
+            class="invalid-msg"
+            role="alert"
+            aria-live="assertive"
+          >
+            <i class="fa-solid fa-circle-exclamation"></i>
+            Invalid username or password.
+          </div>
+        </form>
+      </div>
+
+      <div class="login-footer">
+        <p>
+          &copy; 2024 JEFFIX. All rights reserved. Strictly for Academic
+          Purposes Only
+        </p>
+        <div class="footer-links">
+          <a href="#" tabindex="0">Privacy Policy</a>
+          <a href="#" tabindex="0">Terms of Service</a>
+          <a href="#" tabindex="0">Contact Support</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/jfx.js"></script>
+
+    <style>
+      /* 🔙 Simple style for the Go Back button */
+      .btn-back {
+        background-color: transparent;
+        border: none;
+        color: #333;
+        font-size: 15px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin-bottom: 10px;
+        transition: color 0.2s ease;
+      }
+
+      .btn-back:hover {
+        color: #007bff;
+      }
+
+      .btn-back i {
+        font-size: 14px;
+      }
+    </style>
+  </body>
+</html>

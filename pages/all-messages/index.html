@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/m.css">
+    <title>All Messages | JEFFIX</title>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <div class="m-header-search">
+        <h1 class="m-header-title">All Conversations</h1>
+        <input type="text" id="m-search-input" placeholder="Search conversation...">
+        <select id="m-status-filter" class="m-filter-select">
+            <option value="">All</option>
+            <option value="not_done">Active</option>
+            <option value="done">Inactive</option>
+        </select>
+    </div>
+
+    <div class="m-container">
+        <div class="m-conversation-panel">
+            <div id="m-conversation-list" class="m-conversation-list">
+                <p id="m-loading-conversations">Loading conversations...</p>
+            </div>
+        </div>
+
+        <div class="m-messages-panel">
+            <div class="m-messages-header">
+                <h2 id="m-current-conversation-title">Select a conversation</h2>
+            </div>
+            <div id="m-messages-container" class="m-messages-container">
+                <p id="m-select-placeholder">Please select a conversation from the left.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="../js/nav.js"></script>
+<script src="../js/m.js"></script>
+
+</html>

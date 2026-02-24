@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | JEFFIX</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="../css/dsh.css">
+    <link rel="stylesheet" href="../css/adm.css">
+    <link rel="stylesheet" href="../css/mgr.css">
+    <link rel="stylesheet" href="../css/mch.css">
+    <link rel="stylesheet" href="../css/csh.css">
+</head>
+
+<body class="dsh-body">
+
+    <div class="dsh-loading-container" id="dsh-loading-container">
+        <i class="fas fa-tools dsh-logo-icon"></i>
+
+        <div class="dsh-loading-text">
+            Loading Dashboard...
+        </div>
+
+        <div class="dsh-spinner"></div>
+    </div>
+
+    <div class="dsh-container" id="dsh-container" style="display: none;">
+
+        <header class="dsh-header" id="dsh-header">
+            <h1 class="dsh-page-title">Dashboard</h1>
+        </header>
+
+        <main class="dsh-main-content" id="dsh-main-content">
+            <p>Select a role above to load the dashboard view.</p>
+        </main>
+
+    </div>
+
+    <nav id="nav-placeholder">
+    </nav>
+
+    <script src="../js/nav.js"></script>
+    <script src="../js/mch.js"></script>
+    <script src="../js/adm.js"></script>
+    <script src="../js/mgr.js"></script>
+    <script src="../js/csh.js"></script>
+    <script src="../js/dsh.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,261 @@
+:root {
+    --primary-color: #FF4E1F;
+    --dark-color: #212121;
+    --light-color: #F7F7F7;
+    --background-color: #E8E6DE;
+    --accent-color: #481E14;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--dark-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    align-items: center;
+}
+
+.au-header {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: var(--light-color);
+    border-bottom: 1px solid var(--dark-color);
+    z-index: 50;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.au-header-title {
+    /* "VMV Users List" on the left side using the primary color */
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    flex-shrink: 0; /* Prevents shrinking */
+    padding-right: 1rem;
+    left: 78px;
+    position:  absolute;
+    padding-left: 1rem;
+}
+
+#au-search-input {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    font-size: 1rem;
+    width: 300px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#au-search-input::placeholder {
+    color: #999;
+}
+
+#au-search-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 78, 31, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --- New Sort Filter Styles --- */
+.au-sort-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 10px auto 0; /* Add margin above table */
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-end; /* Align to the right */
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.au-sort-container label {
+    font-size: 0.9rem;
+    color: var(--dark-color);
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+#au-sort-select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    background-color: var(--light-color);
+    cursor: pointer;
+    appearance: none; /* Remove default arrow in some browsers */
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 14px;
+    padding-right: 30px; /* Make space for the custom arrow */
+    min-width: 200px;
+}
+
+
+.au-scroll-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.au-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--light-color);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    overflow: hidden; /* Ensures rounded corners are respected */
+}
+
+.au-table thead {
+    /* Changed to primary-color */
+    background-color: var(--primary-color); 
+    color: var(--light-color);
+}
+
+.au-table th {
+    padding: 15px 20px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.au-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    color: var(--dark-color);
+    vertical-align: middle;
+}
+
+.au-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.au-table tbody tr:hover {
+    background-color: #ededed;
+    cursor: pointer;
+}
+
+.au-table-icon {
+    font-size: 18px;
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+
+.au-view-btn {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.au-view-btn:hover {
+    background-color: #d13a17; /* Darker shade of primary-color */
+}
+
+/* Styles for "No users found" message in the table */
+.au-no-results {
+    font-style: italic;
+    color: #888;
+    text-align: center;
+    padding: 20px !important;
+}
+
+.au-modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+}
+
+.au-modal-content {
+    background-color: var(--light-color);
+    margin: 10% auto;
+    padding: 30px;
+    border: none;
+    width: 90%;
+    max-width: 550px;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.au-close-button {
+    color: #999;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 30px;
+    font-weight: normal;
+    transition: color 0.2s;
+}
+
+.au-close-button:hover,
+.au-close-button:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#au-modal-details h3 {
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 5px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+}
+
+#au-modal-details h3 i {
+    margin-right: 10px;
+}
+
+#au-modal-details p {
+    margin: 8px 0;
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+.au-car-details {
+    border-left: 3px solid var(--primary-color);
+    padding-left: 15px;
+    margin: 15px 0;
+    background-color: #fcfcfc;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.au-no-cars {
+    font-style: italic;
+    color: #888;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}

@@ -1,0 +1,82 @@
+<div class="dashboard-view mgr-view">
+    
+    <section class="mgr-section mgr-operational-financial-summary">
+        <h3 class="mgr-section-title">Shop's Operation</h3>
+        <div class="mgr-grid-container mgr-grid-3-cols">
+
+            <div class="mgr-widget mgr-completed-invoices">
+                <i class="fas fa-file-invoice-dollar mgr-icon"></i>
+                <div class="mgr-data">
+                    <span class="mgr-data-value">0</span>
+                    <span class="mgr-data-label">Completed Invoices (This Month)</span>
+                </div>
+                <div class="mgr-sub-data">
+                    <span>Last Month: 0</span> | <span class="mgr-link-small" onclick="window.location.href='../transaction-history'">View Invoices</span>
+                </div>
+            </div>
+
+            <div class="mgr-widget mgr-ongoing-jobs">
+                <i class="fas fa-tasks mgr-icon"></i>
+                <div class="mgr-data">
+                    <span class="mgr-data-value">0</span>
+                    <span class="mgr-data-label">Pending & Ongoing Job Orders</span>
+                </div>
+                <div class="mgr-sub-data">
+                    <span>Pending: 0</span> | <span>Ongoing: 0</span>
+                </div>
+            </div>
+
+            <div class="mgr-widget mgr-appointments-summary">
+                <i class="fas fa-calendar-alt mgr-icon"></i>
+                <div class="mgr-data">
+                    <span class="mgr-data-value">0</span>
+                    <span class="mgr-data-label">Upcoming Appointments</span>
+                </div>
+                <div class="mgr-sub-data">
+                    <span>Today: 0</span> | <span>Tomorrow: 0</span> | <span>This Week: 0</span> | <span class="mgr-link-small" onclick="window.location.href='../schedule'">View Schedule</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mgr-section mgr-personnel-performance">
+        <h3 class="mgr-section-title">Personnel & Performance</h3>
+        <div class="mgr-grid-container mgr-grid-2-cols">
+
+            <div class="mgr-panel mgr-mechanic-ranking">
+                <h4 class="mgr-subtitle"><i class="fas fa-trophy"></i> Mechanic Service Completion Ranking (This Month)</h4>
+                <ul class="mgr-list mgr-mechanic-list">
+                    </ul>
+            </div>
+
+            <div class="mgr-panel mgr-key-action-items">
+                <h4 class="mgr-subtitle"><i class="fas fa-bell"></i> Key Action Items</h4>
+                
+                <div class="mgr-widget mgr-communication" style="border-left: 5px solid var(--accent-color); box-shadow: none; padding: 10px;">
+                    <i class="fas fa-comments mgr-icon" style="color: var(--accent-color);"></i>
+                    <div class="mgr-data" style="width: 100%;">
+                        <span class="mgr-data-value">0</span>
+                        <span class="mgr-data-label">Active Chat Conversations</span>
+                    </div>
+                </div>
+                <a href="#" class="mgr-link" onclick="window.location.href='../all-messages'">View Conversations</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="mgr-section mgr-quick-links">
+        <h3 class="mgr-section-title">Shortcuts</h3>
+        
+        <button class="mgr-management-btn" onclick="window.location.href='../job-orders'">
+            <i class="fas fa-clipboard-list"></i> Job Orders
+        </button>
+        
+        <button class="mgr-management-btn" onclick="window.location.href='../billing-%26-invoices'">
+            <i class="fas fa-file-invoice"></i> Billing/Invoices
+        </button>
+
+        <button class="mgr-management-btn" onclick="window.location.href='../staff-management'">
+            <i class="fas fa-user-friends"></i> Staff Management
+        </button>
+    </section>
+</div>

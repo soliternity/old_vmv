@@ -1,0 +1,514 @@
+/* csh.css - Styles specific to the Cashier Dashboard View (Updated for Overlay Modal) */
+
+/* --- CSS Variables (Using existing tokens for consistency) --- */
+:root {
+    --primary-color: #FF4E1F;
+    --dark-color: #212121;
+    --light-color: #f7f7f7;
+    --background-color: #E8E6DE;
+    --accent-color: #481E14;
+    --success-color: #4CAF50;
+    --info-color: #007bff;
+}
+
+/* --- Titles and Headings --- */
+.csh-title {
+    color: var(--primary-color);
+    font-size: 2rem;
+    border-bottom: 2px solid var(--accent-color);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.csh-icon-main {
+    margin-right: 10px;
+}
+
+.csh-welcome-message {
+    font-size: 1.1rem;
+    color: var(--dark-color);
+    margin-bottom: 30px;
+}
+
+.csh-section-title {
+    color: var(--accent-color);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+.csh-subtitle {
+    color: var(--dark-color);
+    font-size: 1.2rem;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+/* --- Section and Grid Layouts --- */
+.csh-section {
+    background-color: var(--light-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+.csh-grid-container {
+    display: grid;
+    gap: 20px;
+}
+
+.csh-grid-3-cols {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.csh-grid-2-cols {
+    grid-template-columns: 1.5fr 1fr;
+    /* Adjusted layout for Revenue/History section */
+}
+
+/* --- Widget Styling (Summary) --- */
+.csh-widget {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-left: 5px solid var(--primary-color);
+}
+
+/* Specific Widget Border Colors */
+.csh-billing-pending {
+    border-left: 5px solid var(--primary-color); /* Red/Orange for billing focus */
+}
+
+.csh-appointments {
+    border-left: 5px solid var(--info-color); /* Blue for appointments */
+}
+
+.csh-job-orders {
+    border-left: 5px solid var(--accent-color); /* Darker color for workflow */
+}
+
+.csh-icon {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.csh-data-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--dark-color);
+    display: block;
+}
+
+.csh-data-label {
+    font-size: 0.9rem;
+    color: #666;
+    display: block;
+    margin-top: -5px;
+}
+
+.csh-sub-data {
+    font-size: 0.8rem;
+    color: var(--accent-color);
+    padding-top: 5px;
+    border-top: 1px dashed rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+/* --- Panel Styling (Containers within Sections) --- */
+.csh-panel {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Revenue Panel Specifics (New/Revised) */
+.csh-large-revenue-data .csh-data-value {
+    font-size: 3rem; /* Make revenue stand out */
+    margin-bottom: 5px;
+}
+
+/* --- Action Buttons (Quick Access) --- */
+.csh-quick-access {
+    display: flex;
+    flex-direction: column;
+}
+
+.csh-action-btn {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; /* For link buttons */
+}
+
+.csh-action-btn i {
+    margin-right: 10px;
+}
+
+.csh-process-btn {
+    background-color: var(--primary-color);
+    color: var(--light-color);
+}
+
+.csh-process-btn:hover {
+    background-color: var(--accent-color);
+    transform: translateY(-1px);
+}
+
+.csh-reconcile-btn {
+    background-color: #007bff;
+    color: var(--light-color);
+}
+
+.csh-reconcile-btn:hover {
+    background-color: #0056b3;
+}
+
+/* New Quick Links Button Style */
+.csh-link-btn {
+    background-color: var(--background-color);
+    color: var(--dark-color);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 8px 15px;
+    justify-content: flex-start;
+}
+
+.csh-link-btn:hover {
+    background-color: #e0e0e0;
+    color: var(--accent-color);
+    transform: none;
+}
+
+/* --- Pricing Panel Styling (New/Updated for Results) --- */
+.csh-pricing-panel {
+    display: flex;
+    flex-direction: column;
+    /* Removed height: 100% to allow content to grow */
+}
+
+.csh-search-input {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.csh-pricing-panel .csh-view-btn {
+    margin-top: 5px; /* Adjust margin to accommodate results container */
+    margin-bottom: 15px;
+    background-color: #ccc;
+    color: var(--dark-color);
+}
+
+.csh-pricing-panel .csh-view-btn:hover {
+    background-color: #999;
+    transform: translateY(-1px);
+}
+
+/* --- SEARCH RESULTS LIST STYLES (UPDATED) --- */
+.csh-results-list {
+    margin-top: 15px;
+    padding-top: 10px;
+    border-top: 1px dashed #eee;
+    max-height: 300px; /* Limit height to prevent excessive panel growth */
+    overflow-y: auto; /* Enable scrollbar */
+}
+
+.csh-results-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.csh-results-list ul li {
+    padding: 8px 10px;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    cursor: pointer; /* New: Indicate clickability */
+    transition: background-color 0.1s;
+}
+
+.csh-results-list ul li:last-child {
+    border-bottom: none;
+}
+
+.csh-results-list ul li:hover {
+    background-color: #f0f0f0;
+}
+
+/* New style for selected item */
+.csh-active-selection {
+    background-color: #ffe0b2 !important; /* Light orange highlight */
+    border-left: 3px solid var(--primary-color);
+}
+
+.csh-item-name {
+    font-weight: 600;
+    flex-grow: 1;
+}
+
+.csh-item-price {
+    color: var(--primary-color);
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+/* Parts Table Styling */
+#partsResultsContainer .csh-table {
+    width: 100%; /* Added width for full table */
+    border-collapse: collapse; /* Added border collapse for table appearance */
+    margin: 0;
+}
+
+#partsResultsContainer .csh-table td {
+    padding: 4px 5px;
+    cursor: pointer;
+    text-align: left; /* Ensure text alignment is clean */
+}
+
+#partsResultsContainer .csh-table th {
+    /* Inherit default table header styles */
+    background-color: var(--accent-color);
+    color: var(--light-color);
+    font-weight: 600;
+}
+
+#partsResultsContainer .csh-table tr:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+#partsResultsContainer .csh-result-item-row.csh-active-selection {
+     background-color: #ffe0b2 !important;
+     border-left: 3px solid var(--primary-color);
+}
+
+.csh-initial-msg, .csh-no-results {
+    color: #999;
+    font-style: italic;
+    text-align: center;
+    padding: 10px 0;
+}
+
+/* --- OVERLAY MODAL STYLES (NEW) --- */
+.csh-overlay-modal {
+    position: fixed;
+    z-index: 1000; /* High z-index to ensure it covers the dashboard */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.csh-modal-content {
+    background-color: #fefefe;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 600px; /* Limit size for better focus */
+    position: relative;
+    max-height: 80%;
+    overflow-y: auto;
+}
+
+.csh-modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+}
+
+.csh-modal-close:hover,
+.csh-modal-close:focus {
+    color: var(--primary-color);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.csh-modal-body .csh-detail-title {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.csh-modal-body .csh-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.csh-modal-body p {
+    margin: 0;
+}
+
+.csh-modal-body .csh-detail-value {
+    font-weight: bold;
+    color: var(--primary-color);
+    display: block;
+    font-size: 1.1rem;
+    margin-top: 5px;
+}
+
+.csh-modal-body .csh-detail-label {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.csh-modal-body .csh-detail-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+/* --- Remaining Existing Styles for Tables/Lists (added back for completeness) --- */
+
+.csh-pending-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 15px 0;
+}
+
+.csh-pending-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 100px 120px;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.csh-priority-high {
+    border-left: 5px solid #4CAF50;
+    /* Green for ready to pay */
+}
+
+.csh-priority-medium {
+    border-left: 5px solid #ffc107;
+    /* Yellow for still in workshop */
+}
+
+.csh-invoice-id {
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.csh-customer-name {
+    font-weight: 500;
+}
+
+.csh-amount {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.csh-list-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.csh-pay-btn {
+    background-color: #4CAF50;
+    color: var(--light-color);
+}
+
+.csh-pay-btn:hover {
+    background-color: #388e3c;
+}
+
+.csh-table {
+    /* Styles shared with the parts table if not overridden by #partsResultsContainer */
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.csh-table th,
+.csh-table td {
+    padding: 8px 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.csh-table th {
+    background-color: var(--accent-color);
+    color: var(--light-color);
+    font-weight: 600;
+}
+
+.csh-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.csh-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 900px) {
+
+    .csh-grid-3-cols,
+    .csh-grid-2-cols {
+        grid-template-columns: 1fr;
+    }
+
+    .csh-pending-item {
+        /* Stack elements vertically for small screens */
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto auto;
+        gap: 5px;
+    }
+}

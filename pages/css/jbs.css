@@ -1,0 +1,555 @@
+:root {
+    --jo-primary: #FF4E1F;
+    --jo-dark: #212121;
+    --jo-light: #f7f7f7;
+    --jo-background: #E8E6DE;
+    --jo-accent: #481E14;
+    --jo-card-bg: #FFFFFF;
+    --jo-card-hover: #F9F9F9;
+    --jo-success: #5cb85c;
+    --jo-info: #5bc0de;
+    --jo-warning: #f0ad4e;
+    --jo-danger: #d9534f;
+    --jo-text-color: #333;
+}
+
+body {
+    background-color: var(--jo-background);
+    color: var(--jo-text-color);
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.jo-header-search {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: var(--jo-light);
+    border-bottom: 1px solid var(--jo-dark);
+    z-index: 50;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    /* Ensure it sticks to the top of the viewport */
+    position: sticky;
+    top: 0;
+}
+
+.jo-header-title {
+    /* "Services/Repairs" on the left side using the primary color */
+    color: #FF4E1F;
+    /* primary-color assumed from existing button styles (FF4E1F) */
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    flex-shrink: 0;
+    /* Prevents shrinking */
+    padding-right: 1rem;
+    left: 78px;
+    position: absolute;
+    padding-left: 1rem;
+}
+
+#jo-search-input {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    font-size: 1rem;
+    width: 300px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#jo-search-input::placeholder {
+    color: #999;
+}
+
+#jo-search-input:focus {
+    outline: none;
+    border-color: var(--jo-primary);
+    box-shadow: 0 0 0 3px rgba(255, 78, 31, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --- New Table and Controls Styles --- */
+
+.jo-controls-container {
+    /* New: Max width 1500px */
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 2rem 1rem;
+    
+    /* New: Sticky position for the controls (fixed while main page scrolls) */
+    position: sticky;
+    /* Estimated height of .jo-header-search (approx 6rem/96px) + margin/padding */
+    top: 6.5rem;
+    background-color: var(--jo-background);
+    z-index: 40;
+}
+
+.jo-controls {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 20px;
+}
+
+.jo-filter-group select {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background-color: var(--jo-card-bg);
+}
+
+.jo-sort-group button {
+    background-color: var(--jo-accent);
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.2s;
+    /* display: flex; */
+    align-items: center;
+    gap: 8px;
+}
+
+.jo-sort-group button:hover {
+    background-color: var(--jo-primary);
+}
+
+.jo-sort-group i {
+    font-size: 0.8rem;
+}
+
+.jo-table-container {
+    /* New: Max width 1500px */
+    max-width: 1500px;
+    margin: 0 auto;
+    /* padding: 0 2rem 2rem; */
+    max-height: 850px;
+    /* Set a max height for scrollability */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+    background-color: var(--jo-card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.jo-job-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Sticky Header inside scrollable container and rounded corners */
+.jo-job-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    /* New: For rounded corners to apply to the header block */
+    border-radius: 10px 10px 0 0;
+    overflow: hidden; /* Clips the background of the TH to the rounded border */
+}
+
+.jo-job-table thead th {
+    /* New: Primary color background */
+    background-color: var(--jo-primary); 
+    color: white;
+    padding: 15px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+/* New: Apply border-radius to the first and last th */
+.jo-job-table thead tr th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.jo-job-table thead tr th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.jo-job-table tbody tr {
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.2s ease;
+}
+
+.jo-job-table tbody tr:hover {
+    background-color: var(--jo-card-hover);
+}
+
+.jo-job-table td {
+    padding: 12px 15px;
+    vertical-align: middle;
+    color: var(--jo-text-color);
+}
+
+/* Status Tags in Table */
+.jo-status-tag {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: white;
+    white-space: nowrap;
+    /* Prevent wrap */
+}
+
+.jo-pending {
+    background-color: var(--jo-warning);
+}
+
+.jo-ongoing {
+    background-color: var(--jo-info);
+}
+
+.jo-completed,
+.jo-unpaid {
+    background-color: var(--jo-success);
+}
+
+/* Actions in Table */
+.jo-table-actions {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+.jo-icon-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--jo-accent);
+    font-size: 1.1rem;
+    padding: 5px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.jo-icon-btn:hover {
+    color: var(--jo-primary);
+    transform: scale(1.1);
+}
+
+/* --- END New Table and Controls Styles --- */
+
+/* Modal Overlay */
+.jo-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.jo-modal-content {
+    background-color: white;
+    gap: 20px;
+    display: grid;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 90%;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.jo-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.jo-modal-close:hover,
+.jo-modal-close:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+/* Add/Edit Job Modal */
+.jo-add-job,
+.jo-edit-job {
+    width: 90%;
+    max-width: 1200px;
+}
+
+.jo-add-job-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.jo-column {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.jo-services-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.jo-column h3 {
+    margin-top: 0;
+    color: var(--jo-dark);
+}
+
+.jo-form-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.jo-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.jo-form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.jo-form-group.jo-search-field .jo-search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 5px 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none;
+}
+
+.jo-search-results li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+}
+
+.jo-search-results li:last-child {
+    border-bottom: none;
+}
+
+.jo-search-results li:hover {
+    background-color: #f0f0f0;
+}
+
+
+.jo-selected-list {
+    list-style: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.jo-selected-list li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    background-color: #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.jo-selected-list .remove-item {
+    cursor: pointer;
+    color: var(--jo-danger);
+    font-size: 1.1rem;
+    transition: color 0.2s;
+}
+
+.jo-selected-list .remove-item:hover {
+    color: var(--jo-dark);
+}
+
+.jo-overall-estimate {
+    margin-top: auto;
+    /* Push to the bottom */
+    padding-top: 10px;
+    border-top: 2px dashed #ccc;
+}
+
+/* FAB Button */
+.jo-fab-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--jo-primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    z-index: 90;
+}
+
+.jo-fab-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Submit Button */
+.jo-submit-btn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: var(--jo-primary);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.2s ease;
+}
+
+.jo-submit-btn:hover {
+    background-color: #d4431a;
+}
+
+/* Summary Modal */
+.jo-summary-content {
+    max-width: 1000px;
+}
+
+.jo-summary-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.jo-summary-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+}
+
+.jo-summary-column {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.jo-summary-column h3 {
+    margin-top: 0;
+}
+
+.jo-summary-column ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.jo-summary-column li {
+    background-color: #f7f7f7;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.jo-overall-estimate-container {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    text-align: right;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Delete Modal */
+.jo-delete-confirm {
+    text-align: center;
+    max-width: 500px;
+}
+
+.jo-delete-icon-container {
+    color: var(--jo-danger);
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.jo-delete-confirm h3 {
+    color: var(--jo-dark);
+}
+
+.jo-delete-confirm p {
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.jo-delete-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.jo-confirm-delete-btn,
+.jo-cancel-btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    font-size: 1rem;
+    background-color: transparent;
+    border: 1px solid;
+}
+
+.jo-confirm-delete-btn {
+    background-color: var(--jo-danger);
+    color: white;
+    border-color: var(--jo-danger);
+}
+
+.jo-confirm-delete-btn:hover {
+    background-color: #c9302c;
+    border-color: #c9302c;
+}
+
+.jo-cancel-btn {
+    color: var(--jo-dark);
+    border-color: var(--jo-dark);
+}
+
+.jo-cancel-btn:hover {
+    background-color: var(--jo-dark);
+    color: white;
+}

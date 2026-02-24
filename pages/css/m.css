@@ -1,0 +1,240 @@
+:root {
+    --m-primary: #FF4E1F;
+    --m-dark: #212121;
+    --m-light: #f7f7f7;
+    --m-background: #E8E6DE;
+    --m-accent: #481E14;
+}
+
+body {
+    background-color: var(--m-background);
+}
+
+/* * 1. HEADER & SEARCH/FILTER BAR 
+ */
+.m-header-search {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background-color: var(--m-light);
+    border-bottom: 1px solid var(--m-dark);
+    z-index: 50;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.m-header-title {
+    /* "Services/Repairs" on the left side using the primary color */
+    color: #FF4E1F; /* primary-color assumed from existing button styles (FF4E1F) */
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    flex-shrink: 0; /* Prevents shrinking */
+    padding-right: 1rem;
+    left: 78px;
+    position:  absolute;
+    padding-left: 1rem;
+}
+
+#m-search-input {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    font-size: 1rem;
+    width: 300px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-right: 15px;
+}
+
+#m-search-input::placeholder {
+    color: #999;
+}
+
+#m-search-input:focus {
+    outline: none;
+    border-color: var(--m-primary);
+    box-shadow: 0 0 0 3px rgba(255, 78, 31, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.m-filter-select {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.m-filter-select:focus {
+    outline: none;
+    border-color: var(--m-primary);
+    box-shadow: 0 0 0 3px rgba(255, 78, 31, 0.2), 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* * 2. MAIN MESSAGE CONTAINER 
+ */
+.m-container {
+    display: flex;
+    max-width: 1500px;
+    margin: 0px auto 20px auto;
+    height: 945px; /* Increased height to fill the space where the input area was */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+/* Conversation Panel (Left Side) */
+.m-conversation-panel {
+    width: 350px;
+    border-right: 1px solid #ddd;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--m-light);
+}
+
+.m-conversation-list {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 0;
+    list-style: none;
+}
+
+.m-conversation-item {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.m-conversation-item:hover, .m-conversation-item.m-active {
+    background-color: var(--m-background);
+}
+
+.m-conversation-info {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+.m-conversation-name {
+    font-weight: bold;
+    color: var(--m-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 3px;
+}
+
+.m-conversation-last-message {
+    font-size: 0.85rem;
+    color: #666;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.m-conversation-status {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 10px;
+    margin-left: 10px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.m-status {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    flex-shrink: 0;
+    text-transform: capitalize; /* Optional: ensures "Active/Inactive" looks clean */
+}
+
+.m-status-not_done {
+    background-color:  #4CAF50;
+    color: white;
+}
+
+.m-status-done {
+    background-color:var(--m-primary); /* Green */
+    color: white;
+}
+
+/* Messages Panel (Right Side) */
+.m-messages-panel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.m-messages-header {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+    background-color: #fff;
+    flex-shrink: 0;
+}
+
+#m-current-conversation-title {
+    margin: 0;
+    font-size: 1.2rem;
+    color: var(--m-accent);
+}
+
+.m-messages-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#m-select-placeholder, #m-loading-conversations {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+}
+
+/* Message Bubbles */
+.m-message-bubble {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 18px;
+    line-height: 1.4;
+    position: relative;
+    word-wrap: break-word;
+}
+
+.m-message-user {
+    align-self: flex-start;
+    background-color: #eee;
+    color: var(--m-dark);
+    border-top-left-radius: 5px;
+}
+
+.m-message-staff {
+    align-self: flex-end;
+    background-color: var(--m-primary);
+    color: white;
+    border-top-right-radius: 5px;
+}
+
+.m-message-time {
+    display: block;
+    font-size: 0.7rem;
+    margin-top: 5px;
+    text-align: right;
+    color: inherit;
+    opacity: 0.7;
+}
+
+/* REMOVED: .m-message-input-area, #m-message-input, #m-send-button styles */

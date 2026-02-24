@@ -1,0 +1,153 @@
+/* --- CSS Variables / Design Tokens --- */
+:root {
+    --primary-color: #FF4E1F;
+    --dark-color: #212121;
+    --light-color: #f7f7f7;
+    --background-color: #E8E6DE;
+    --accent-color: #481E14;
+}
+
+/* --- Base Styles: Removed broken centering --- */
+.dsh-body {
+    position: relative;
+    /* Keeping the required left offset */
+    left: 78px; 
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--dark-color);
+
+    /* Removed: display: flex; justify-content: center; align-items: center; */
+    overflow-x: hidden;
+}
+
+/* --- Loading Container: FIXED CENTERING APPLIED --- */
+.dsh-loading-container {
+    /* Set the container to occupy the full viewport and be fixed */
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1; /* Ensure it's above everything else */
+    background-color: var(--background-color); /* Cover the whole screen */
+
+    /* Flexbox centering for its children (the spinner and text) */
+    display: flex;
+    justify-content: center; /* Horizontal center */
+    align-items: center;    /* Vertical center */
+    flex-direction: column;
+    text-align: center;
+}
+
+/* --- Logo Icon --- */
+.dsh-logo-icon {
+    font-size: 4rem;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+/* --- Loading Text --- */
+.dsh-loading-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+
+/* --- Spinner Animation --- */
+.dsh-spinner {
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: dsh-spin 1s linear infinite;
+}
+
+@keyframes dsh-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* --- New Global Layout Styles --- */
+
+.dsh-container {
+    /* Use Grid Layout for Header and Main Content (Sidebar removed) */
+    display: grid;
+    grid-template-areas:
+        "header"
+        "main";
+    /* Header and Main Content now span 100% width */
+    grid-template-columns: 1fr;
+    width: 100%;
+}
+
+/* --- Role Testing Buttons (Unchanged) --- */
+.dsh-test-buttons {
+    display:none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 5px 0;
+    background-color: var(--light-color);
+    border-bottom: 2px solid var(--accent-color);
+    z-index: 99;
+}
+
+.dsh-btn {
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+
+.dsh-btn:hover {
+    background-color: var(--accent-color);
+}
+
+
+/* --- HEADER STYLE --- */
+.dsh-header {
+    grid-area: header;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    /* The padding is kept at 2rem as per your previous instruction */
+    padding: 2rem; 
+    background-color: var(--light-color);
+    border-bottom: 1px solid var(--dark-color);
+    z-index: 50;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    position: sticky;
+    top: 0;
+}
+
+.dsh-page-title {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    flex-shrink: 0; 
+    padding-right: 1rem;
+    position:  relative;
+}
+
+/* --- Main Content Styles (Updated for new grid area) --- */
+.dsh-main-content {
+    width: calc(100% - 78px);
+    overflow-y: auto;
+    grid-area: main;
+    padding: 20px;
+    background-color: var(--background-color);
+}

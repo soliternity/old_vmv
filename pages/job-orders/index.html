@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/jbs.css">
+    <link rel="stylesheet" href="../css/nav.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Job Orders | JEFFIX</title>
+</head>
+
+<body>
+    <div id="nav-placeholder"></div>
+
+    <div class="jo-header-search">
+        <h1 class="jo-header-title">Job Orders</h1>
+        <input type="text" id="jo-search-input" placeholder="Search job orders...">
+    </div>
+
+    <div class="jo-controls-container">
+        <div class="jo-controls">
+            <div class="jo-filter-group">
+                <label for="jo-status-filter">Filter by Status:</label>
+                <select id="jo-status-filter">
+                    <option value="All">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Ongoing">Ongoing</option>
+                    <option value="Completed">Completed / Unpaid</option>
+                </select>
+            </div>
+            <div class="jo-sort-group">
+                <label>Sort by Services:</label>
+                <button id="jo-sort-services-btn" data-sort-order="asc">
+                    Services <i class="fas fa-sort-up"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="jo-table-container">
+        <table class="jo-job-table">
+            <thead class="jo-sticky-header">
+                <tr>
+                    <th>Job ID</th>
+                    <th>Customer Name</th>
+                    <th>Vehicle</th>
+                    <th>Plate No.</th>
+                    <th id="jo-services-header">Services</th>
+                    <th>Date Created</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="jo-list-container">
+                </tbody>
+        </table>
+        <p id="no-jobs-message" class="no-jobs-message" style="display: none;">No job orders found.</p>
+    </div>
+
+    <button class="jo-fab-btn" id="jo-add-btn">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <div id="jo-add-modal" class="jo-modal-overlay">
+        <div class="jo-modal-content jo-add-job">
+            <span class="jo-modal-close">&times;</span>
+            <h2>Create New Job Order</h2>
+            <div class="jo-add-job-container">
+                <div class="jo-column">
+                    <h3>Customer Details</h3>
+                    <form id="jo-add-form">
+                        <div class="jo-form-group jo-search-field">
+                            <label for="jo-customer-search">Customer Name:</label>
+                            <input type="text" id="jo-customer-search" placeholder="Search customer...">
+                            <ul id="jo-customer-results" class="jo-search-results"></ul>
+                        </div>
+                        <div class="jo-form-group">
+                            <label for="jo-car-brand">Car Brand:</label>
+                            <input type="text" id="jo-car-brand" placeholder="e.g., Toyota Vios" >
+                        </div>
+                        <div class="jo-form-group">
+                            <label for="jo-car-color">Car Color:</label>
+                            <input type="text" id="jo-car-color" placeholder="e.g., Black" >
+                        </div>
+                        <div class="jo-form-group">
+                            <label for="jo-plate-no">Plate Number:</label>
+                            <input type="text" id="jo-plate-no" placeholder="e.g., ABC 1234" >
+                        </div>
+                    </form>
+                </div>
+
+                <div class="jo-column jo-services-column">
+                    <h3>Services</h3>
+                    <div class="jo-form-group jo-search-field">
+                        <label for="jo-service-search">Add Service:</label>
+                        <input type="text" id="jo-service-search" placeholder="Search services...">
+                        <ul id="jo-service-results" class="jo-search-results"></ul>
+                    </div>
+                    <ul id="jo-services-list" class="jo-selected-list"></ul>
+                    <div class="jo-overall-estimate">
+                        <p><strong>Estimated Total:</strong> <span id="jo-overall-service-cost">₱ 0.00</span></p>
+                    </div>
+                </div>
+
+                <div class="jo-column">
+                    <h3>Mechanics</h3>
+                    <div class="jo-form-group jo-search-field">
+                        <label for="jo-mechanic-search">Assign Mechanic:</label>
+                        <input type="text" id="jo-mechanic-search" placeholder="Search mechanics...">
+                        <ul id="jo-mechanic-results" class="jo-search-results"></ul>
+                    </div>
+                    <ul id="jo-mechanics-list" class="jo-selected-list"></ul>
+                </div>
+            </div>
+            <p id="jo-add-error-message" class="jo-error-message" style="color: var(--jo-danger); text-align: center; font-weight: bold;"></p>
+            <button class="jo-submit-btn">Create Job Order</button>
+        </div>
+    </div>
+
+    <div id="jo-summary-modal" class="jo-modal-overlay">
+        <div class="jo-modal-content jo-summary-content">
+            <span class="jo-modal-close">&times;</span>
+            <h2>Summary of Job Order <span id="jo-summary-id-header"></span></h2>
+            <div class="jo-summary-grid">
+                <div class="jo-summary-details-grid">
+                    <div class="jo-summary-column">
+                        <h3>Job Details</h3>
+                        <p><strong>Job ID:</strong> <span id="jo-summary-id"></span></p>
+                        <p><strong>Status:</strong> <span id="jo-summary-status" class="jo-status-tag"></span></p>
+                        <p><strong>Date:</strong> <span id="jo-summary-date"></span></p>
+                    </div>
+                    <div class="jo-summary-column">
+                        <h3>Customer Details</h3>
+                        <p><strong>Customer Name:</strong> <span id="jo-summary-customer"></span></p>
+                        <p><strong>Vehicle:</strong> <span id="jo-summary-vehicle"></span></p>
+                        <p><strong>Color:</strong> <span id="jo-summary-color"></span></p>
+                        <p><strong>Plate No:</strong> <span id="jo-summary-plate-no"></span></p>
+                    </div>
+                    <div class="jo-summary-column">
+                        <h3>Services Rendered</h3>
+                        <ul id="jo-summary-services-list"></ul>
+                    </div>
+                    <div class="jo-summary-column">
+                        <h3>Assigned Mechanics</h3>
+                        <ul id="jo-summary-mechanics-list"></ul>
+                    </div>
+                </div>
+
+                <div class="jo-overall-estimate-container">
+                    <p><strong>Total Estimated Cost:</strong> <span id="jo-summary-overall-cost">₱ 0.00</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="jo-edit-modal" class="jo-modal-overlay">
+        <div class="jo-modal-content jo-edit-job">
+            <span class="jo-modal-close">&times;</span>
+            <h2>Edit Job Order <span id="jo-edit-id"></span></h2>
+            <div class="jo-add-job-container">
+                <div class="jo-column">
+                    <h3>Customer Details (Cannot be edited)</h3>
+                    <div class="jo-form-group">
+                        <label for="jo-edit-customer-name">Customer Name:</label>
+                        <input type="text" id="jo-edit-customer-name" readonly>
+                    </div>
+                    <div class="jo-form-group">
+                        <label for="jo-edit-car-brand">Car Brand:</label>
+                        <input type="text" id="jo-edit-car-brand" placeholder="e.g., Toyota Vios" readonly>
+                    </div>
+                    <div class="jo-form-group">
+                        <label for="jo-edit-car-color">Car Color:</label>
+                        <input type="text" id="jo-edit-car-color" placeholder="e.g., Black" readonly>
+                    </div>
+                    <div class="jo-form-group">
+                        <label for="jo-edit-plate-no">Plate Number:</label>
+                        <input type="text" id="jo-edit-plate-no" placeholder="e.g., ABC 1234" readonly>
+                    </div>
+                </div>
+
+                <div class="jo-column jo-services-column">
+                    <h3>Services</h3>
+                    <div class="jo-form-group jo-search-field">
+                        <label for="jo-edit-service-search">Add Service:</label>
+                        <input type="text" id="jo-edit-service-search" placeholder="Search services...">
+                        <ul id="jo-edit-service-results" class="jo-search-results"></ul>
+                    </div>
+                    <ul id="jo-edit-services-list" class="jo-selected-list"></ul>
+                    <div class="jo-overall-estimate">
+                        <p><strong>Estimated Total:</strong> <span id="jo-edit-overall-service-cost">₱ 0.00</span></p>
+                    </div>
+                </div>
+
+                <div class="jo-column">
+                    <h3>Mechanics</h3>
+                    <div class="jo-form-group jo-search-field">
+                        <label for="jo-edit-mechanic-search">Assign Mechanic:</label>
+                        <input type="text" id="jo-edit-mechanic-search" placeholder="Search mechanics...">
+                        <ul id="jo-edit-mechanic-results" class="jo-search-results"></ul>
+                    </div>
+                    <ul id="jo-edit-mechanics-list" class="jo-selected-list"></ul>
+                </div>
+            </div>
+            <p id="jo-edit-error-message" class="jo-error-message" style="color: var(--jo-danger); text-align: center; font-weight: bold;"></p>
+            <button class="jo-submit-btn">Save Changes</button>
+        </div>
+    </div>
+
+
+    <div id="jo-delete-modal" class="jo-modal-overlay">
+        <div class="jo-modal-content jo-delete-confirm">
+            <span class="jo-modal-close">&times;</span>
+            <div class="jo-delete-icon-container">
+                <i class="fa-solid fa-circle-exclamation"></i>
+            </div>
+            <h3>Delete Job Order</h3>
+            <p>Are you sure you want to delete job order <strong id="jo-delete-id"></strong>? This action cannot be
+                undone.</p>
+            <div class="jo-delete-actions">
+                <button id="jo-confirm-delete-btn" class="jo-confirm-delete-btn">Delete</button>
+                <button id="jo-cancel-delete-btn" class="jo-cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="../js/jbs.js"></script>
+<script src="../js/nav.js"></script>
+
+</html>

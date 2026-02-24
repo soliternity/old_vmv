@@ -1,0 +1,81 @@
+<div class="dashboard-view mch-view">
+    
+    <section class="mch-section mch-quick-stats">
+        <h3 class="mch-section-title"><i class="fas fa-chart-line mch-icon-main"></i> Mechanic Quick Overview</h3>
+        <div class="mch-grid-container mch-grid-2-cols">
+            
+            <div class="mch-panel mch-job-count-panel">
+                <h4 class="mch-subtitle">Assigned Services</h4>
+                <div class="mch-progress-gauge">
+                    <i class="fas fa-tools mch-progress-icon" style="color: var(--primary-color);"></i>
+                    <div class="mch-data-progress">
+                        <span class="mch-data-value" id="jobCountValue">0</span> 
+                        <span class="mch-data-label">Total Services Assigned</span>
+                    </div>
+                </div>
+                <div class="mch-summary-bar" id="jobSummaryBar">
+                    </div>
+                <div class="mch-status-key">
+                    <span style="color: var(--primary-color);"><i class="fas fa-circle"></i> Ongoing/Pending</span>
+                    <span style="color: #4CAF50;"><i class="fas fa-circle"></i> Completed</span>
+                </div>
+                <a href="../my-jobs" class="mch-link mch-all-jobs">View All Assigned Jobs</a>
+            </div>
+
+            <div class="mch-panel mch-job-list-panel">
+                <h4 class="mch-subtitle">Current Jobs</h4>
+                <ul class="mch-job-list" id="prioritizedJobList"> 
+                    </ul>
+                <a href="../my-jobs" class="mch-link mch-all-jobs">View All Assigned Jobs</a>
+            </div>
+
+        </div>
+    </section>
+
+    <hr/>
+
+    <section class="mch-section mch-core-operations">
+        <h3 class="mch-section-title"><i class="fas fa-hammer mch-icon-main"></i> Core Operations</h3>
+        
+        <div class="mch-grid-container mch-grid-3-cols"> 
+
+            <div class="mch-panel mch-info-access">
+                <h4 class="mch-subtitle"><i class="fas fa-wrench"></i> Services & Repair Procedures</h4>
+                
+                <div class="mch-search-container">
+                    <input type="text" class="mch-search-input" id="serviceSearchInput" placeholder="Search for Service Codes or TSBs...">
+                </div>
+                <ul class="mch-search-results-list" id="serviceSearchResults"></ul>
+                
+                <a href="../services" class="mch-link mch-services-redirect">View All Services Offered</a> 
+            </div>
+
+            <div class="mch-panel mch-parts-access">
+                <h4 class="mch-subtitle"><i class="fas fa-car-battery"></i> Vehicle Parts Lookup</h4>
+
+                <div class="mch-search-container">
+                    <input type="text" class="mch-search-input" id="partsSearchInput" placeholder="Search for Parts, PN, or Supplier...">
+                </div>
+                <ul class="mch-search-results-list" id="partsSearchResults"></ul>
+                
+                <a href="../parts" class="mch-link mch-parts-redirect">View Full Inventory System</a> 
+            </div>
+
+            <div class="mch-panel mch-chats-widget">
+                <h4 class="mch-subtitle"><i class="fas fa-comment-dots"></i> Conversations (<span id="totalChatCount">0</span>)</h4>
+                <ul class="mch-chat-list" id="chatList">
+                    </ul>
+                <a href="../chats" class="mch-link mch-all-chats" onclick="console.log('Navigating to full Chat Communication Center.');">Go to Communication Center</a> 
+            </div>
+
+        </div>
+    </section>
+
+    <div id="mchDetailView" class="mch-detail-view mch-hidden">
+        <button class="mch-detail-close" onclick="document.getElementById('mchDetailView').classList.add('mch-hidden')">&times;</button>
+        <h4 id="detailTitle" class="mch-subtitle"></h4>
+        <div id="detailContent" class="mch-detail-content"></div>
+    </div>
+</div>
+
+<script src="mch.js"></script>
